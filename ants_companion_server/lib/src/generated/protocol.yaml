@@ -1,0 +1,16 @@
+ants:
+  - create:
+  - all:
+  - byId:
+  - update:
+  - delete:
+example:
+  - hello:
+theme:
+  - changeTheme:
+tierTags:
+  - create:
+  - all:
+  - tierTagsByAntId:
+  - update:
+  - delete:

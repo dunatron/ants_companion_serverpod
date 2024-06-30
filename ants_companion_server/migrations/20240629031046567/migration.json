@@ -1,0 +1,107 @@
+{
+  "actions": [
+    {
+      "type": "deleteTable",
+      "deleteTable": "tier_tag"
+    },
+    {
+      "type": "createTable",
+      "createTable": {
+        "name": "tier_tag",
+        "dartName": "TierTag",
+        "module": "ants_companion",
+        "schema": "public",
+        "columns": [
+          {
+            "name": "id",
+            "columnType": 6,
+            "isNullable": false,
+            "columnDefault": "nextval('tier_tag_id_seq'::regclass)",
+            "dartType": "int?"
+          },
+          {
+            "name": "rating",
+            "columnType": 6,
+            "isNullable": false,
+            "dartType": "protocol:TierRating"
+          },
+          {
+            "name": "position",
+            "columnType": 6,
+            "isNullable": false,
+            "dartType": "protocol:LineupPosition"
+          },
+          {
+            "name": "reason",
+            "columnType": 0,
+            "isNullable": false,
+            "dartType": "String"
+          },
+          {
+            "name": "createdAt",
+            "columnType": 4,
+            "isNullable": false,
+            "dartType": "DateTime"
+          },
+          {
+            "name": "antId",
+            "columnType": 6,
+            "isNullable": false,
+            "dartType": "int"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "constraintName": "tier_tag_fk_0",
+            "columns": [
+              "antId"
+            ],
+            "referenceTable": "ant",
+            "referenceTableSchema": "public",
+            "referenceColumns": [
+              "id"
+            ],
+            "onUpdate": 3,
+            "onDelete": 3
+          }
+        ],
+        "indexes": [
+          {
+            "indexName": "tier_tag_pkey",
+            "elements": [
+              {
+                "type": 0,
+                "definition": "id"
+              }
+            ],
+            "type": "btree",
+            "isUnique": true,
+            "isPrimary": true
+          }
+        ],
+        "managed": true
+      }
+    }
+  ],
+  "warnings": [
+    {
+      "type": "columnDropped",
+      "message": "Column \"name\" of table \"tier_tag\" will be dropped.",
+      "table": "tier_tag",
+      "columns": [
+        "name"
+      ],
+      "destrucive": true
+    },
+    {
+      "type": "tableDropped",
+      "message": "One or more columns are added to table \"tier_tag\" which cannot be added in a table migration. The complete table will be deleted and recreated.",
+      "table": "tier_tag",
+      "columns": [
+        "rating"
+      ],
+      "destrucive": true
+    }
+  ],
+  "migrationApiVersion": 1
+}

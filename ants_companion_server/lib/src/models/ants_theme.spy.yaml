@@ -1,0 +1,3 @@
+class: AntsTheme
+fields:
+  dark: bool

@@ -1,0 +1,11 @@
+class: TierTag
+table: tier_tag
+fields:
+  rating: TierRating
+  position: LineupPosition
+  # kind of want antType here so its as easy as getting all the tags
+  # issue here is we still need the ant info for the tag to display
+  # so some normalization of the data in the app would be useful!
+  reason: String
+  createdAt: DateTime
+  antId: int, relation(name=ant_tier_tags, parent=ant)

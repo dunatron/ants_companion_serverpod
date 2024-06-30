@@ -1,0 +1,22 @@
+version: '3.7'
+
+services:
+  postgres:
+    image: postgres:14.1
+    ports:
+      - '8090:5432'
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_DB: ants_companion
+      POSTGRES_PASSWORD: "iNkvkAlcOOb2xy0rxMWGFgaJvE6Uzj0e"
+    volumes:
+      - ants_companion_data:/var/lib/postgresql/data
+  redis:
+    image: redis:6.2.6
+    ports:
+      - '8091:6379'
+    command: redis-server --requirepass "gL0N5O2OO63BHFYeu18VCWyx7nGaR6BT"
+    environment:
+      - REDIS_REPLICATION_MODE=master
+volumes:
+  ants_companion_data:

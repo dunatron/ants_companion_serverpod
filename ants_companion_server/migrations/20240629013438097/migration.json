@@ -1,0 +1,72 @@
+{
+  "actions": [
+    {
+      "type": "deleteTable",
+      "deleteTable": "ant"
+    },
+    {
+      "type": "createTable",
+      "createTable": {
+        "name": "ant",
+        "dartName": "Ant",
+        "module": "ants_companion",
+        "schema": "public",
+        "columns": [
+          {
+            "name": "id",
+            "columnType": 6,
+            "isNullable": false,
+            "columnDefault": "nextval('ant_id_seq'::regclass)",
+            "dartType": "int?"
+          },
+          {
+            "name": "name",
+            "columnType": 0,
+            "isNullable": false,
+            "dartType": "String"
+          },
+          {
+            "name": "type",
+            "columnType": 6,
+            "isNullable": false,
+            "dartType": "protocol:AntType"
+          },
+          {
+            "name": "createdAt",
+            "columnType": 4,
+            "isNullable": false,
+            "dartType": "DateTime"
+          }
+        ],
+        "foreignKeys": [],
+        "indexes": [
+          {
+            "indexName": "ant_pkey",
+            "elements": [
+              {
+                "type": 0,
+                "definition": "id"
+              }
+            ],
+            "type": "btree",
+            "isUnique": true,
+            "isPrimary": true
+          }
+        ],
+        "managed": true
+      }
+    }
+  ],
+  "warnings": [
+    {
+      "type": "tableDropped",
+      "message": "One or more columns are added to table \"ant\" which cannot be added in a table migration. The complete table will be deleted and recreated.",
+      "table": "ant",
+      "columns": [
+        "type"
+      ],
+      "destrucive": true
+    }
+  ],
+  "migrationApiVersion": 1
+}

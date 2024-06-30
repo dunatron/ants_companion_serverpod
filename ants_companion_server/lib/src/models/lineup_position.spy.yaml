@@ -1,0 +1,5 @@
+enum: LineupPosition
+values:
+  - front
+  - middle
+  - back

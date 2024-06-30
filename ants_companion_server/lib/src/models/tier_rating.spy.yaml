@@ -1,0 +1,9 @@
+enum: TierRating
+values:
+  - meta
+  - f2pMeta
+  - s
+  - a
+  - b
+  - c
+  - f

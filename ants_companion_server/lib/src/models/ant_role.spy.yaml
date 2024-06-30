@@ -1,0 +1,5 @@
+enum: AntRole
+values:
+  - melee
+  - support
+  - ranged

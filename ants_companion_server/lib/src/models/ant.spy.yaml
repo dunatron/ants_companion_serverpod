@@ -1,0 +1,9 @@
+class: Ant
+table: ant
+fields:
+  name: String
+  description: String
+  type: AntType
+  role: AntRole
+  createdAt: DateTime
+  tierTags: List<TierTag>?, relation(name=ant_tier_tags)

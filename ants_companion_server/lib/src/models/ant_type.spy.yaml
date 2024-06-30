@@ -1,0 +1,6 @@
+enum: AntType
+values:
+  - guardian
+  - shooter
+  - carrier
+  - universal

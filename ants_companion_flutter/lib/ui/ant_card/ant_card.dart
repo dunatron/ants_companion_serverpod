@@ -1,23 +1,64 @@
-import 'package:ants_companion_flutter/domain/models/ant.dart';
+import 'package:ants_companion_flutter/domain/ants/models/ant.dart';
+import 'package:ants_companion_flutter/domain/tier_tags/tier_tags.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 
 class AntCard extends StatelessWidget {
-  const AntCard({super.key, this.onImageTap});
+  const AntCard({
+    super.key,
+    this.onImageTap,
+    required this.ant,
+  });
+
+  final Ant ant;
 
   final Function()? onImageTap;
 
   @override
   Widget build(BuildContext context) {
     return Card(
-        child: Column(
-      children: [
-        ElevatedButton(
-          onPressed: onImageTap,
-          child: Text('Image Tap'),
-        )
-      ],
-    ));
+      child: Column(
+        children: [
+          Text(ant.name),
+          // Text(ant.tierTags.join(', ')),
+          AntTierTags(
+            antId: ant.id,
+          ),
+          ElevatedButton(
+            onPressed: onImageTap,
+            child: Text('Image Tap'),
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class AntTierTags extends StatelessWidget {
+  AntTierTags({
+    super.key,
+    required this.antId,
+  });
+
+  final String antId;
+
+  final TierTags _tierTags = GetIt.I<TierTags>();
+
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder(
+      stream: _tierTags.tierTagsForAnt(antId),
+      builder: (context, snapshot) {
+        final data = snapshot.data;
+
+        if (data == null) {
+          return const CircularProgressIndicator();
+        }
+
+        return Text(data.map((e) => e.rating).join(', '));
+      },
+    );
   }
 }
 

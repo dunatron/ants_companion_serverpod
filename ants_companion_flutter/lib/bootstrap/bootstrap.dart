@@ -5,7 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 Future<void> bootstrap(Widget child) async {
-  final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
 
   // unawaited(MobileAds.instance.initialize());
 
@@ -18,13 +18,7 @@ Future<void> bootstrap(Widget child) async {
     return true;
   };
 
-  setupDI();
-
-  // final dir = await getApplicationDocumentsDirectory();
-  // final isar = await Isar.open(
-  //   [HatchRecordingSchema],
-  //   directory: dir.path,
-  // );
+  await setupDI();
 
   runApp(child);
 }

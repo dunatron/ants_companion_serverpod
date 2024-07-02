@@ -1,5 +1,6 @@
 import 'package:ants_companion_flutter/ui/admin/admin_screen.dart';
 import 'package:ants_companion_flutter/ui/create_ant/create_ant_screen.dart';
+import 'package:ants_companion_flutter/ui/create_tier_tag/create_tier_tag_screen.dart';
 import 'package:ants_companion_flutter/ui/home/home_screen.dart';
 import 'package:ants_companion_flutter/ui/route_not_found/route_not_found_screen.dart';
 import 'package:ants_companion_flutter/ui/tier_ratings/tier_ratings_screen.dart';
@@ -37,6 +38,11 @@ final routes = <RouteBase>[
             path: 'create-ant',
             builder: (BuildContext context, GoRouterState state) =>
                 const CreateAntScreen(),
+          ),
+          GoRoute(
+            path: 'create-tier-tag',
+            builder: (BuildContext context, GoRouterState state) =>
+                const CreateTierTagScreen(),
           )
         ],
       ),

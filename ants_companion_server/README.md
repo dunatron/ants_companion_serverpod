@@ -26,6 +26,7 @@ serverpod generate
 
 ```bash
 serverpod generate
-serverpod apply-migration
+serverpod create-migration
+serverpod create-migration --force
 dart bin/main.dart --apply-migrations
 ```

@@ -16,6 +16,7 @@ abstract class TierTag extends _i1.TableRow
     implements _i1.ProtocolSerialization {
   TierTag._({
     int? id,
+    required this.type,
     required this.rating,
     required this.position,
     required this.reason,
@@ -25,6 +26,7 @@ abstract class TierTag extends _i1.TableRow
 
   factory TierTag({
     int? id,
+    required _i2.TierTagType type,
     required _i2.TierRating rating,
     required _i2.LineupPosition position,
     required String reason,
@@ -35,6 +37,7 @@ abstract class TierTag extends _i1.TableRow
   factory TierTag.fromJson(Map<String, dynamic> jsonSerialization) {
     return TierTag(
       id: jsonSerialization['id'] as int?,
+      type: _i2.TierTagType.fromJson((jsonSerialization['type'] as int)),
       rating: _i2.TierRating.fromJson((jsonSerialization['rating'] as int)),
       position:
           _i2.LineupPosition.fromJson((jsonSerialization['position'] as int)),
@@ -48,6 +51,8 @@ abstract class TierTag extends _i1.TableRow
   static final t = TierTagTable();
 
   static const db = TierTagRepository._();
+
+  _i2.TierTagType type;
 
   _i2.TierRating rating;
 
@@ -64,6 +69,7 @@ abstract class TierTag extends _i1.TableRow
 
   TierTag copyWith({
     int? id,
+    _i2.TierTagType? type,
     _i2.TierRating? rating,
     _i2.LineupPosition? position,
     String? reason,
@@ -74,6 +80,7 @@ abstract class TierTag extends _i1.TableRow
   Map<String, dynamic> toJson() {
     return {
       if (id != null) 'id': id,
+      'type': type.toJson(),
       'rating': rating.toJson(),
       'position': position.toJson(),
       'reason': reason,
@@ -86,6 +93,7 @@ abstract class TierTag extends _i1.TableRow
   Map<String, dynamic> toJsonForProtocol() {
     return {
       if (id != null) 'id': id,
+      'type': type.toJson(),
       'rating': rating.toJson(),
       'position': position.toJson(),
       'reason': reason,
@@ -129,6 +137,7 @@ class _Undefined {}
 class _TierTagImpl extends TierTag {
   _TierTagImpl({
     int? id,
+    required _i2.TierTagType type,
     required _i2.TierRating rating,
     required _i2.LineupPosition position,
     required String reason,
@@ -136,6 +145,7 @@ class _TierTagImpl extends TierTag {
     required int antId,
   }) : super._(
           id: id,
+          type: type,
           rating: rating,
           position: position,
           reason: reason,
@@ -146,6 +156,7 @@ class _TierTagImpl extends TierTag {
   @override
   TierTag copyWith({
     Object? id = _Undefined,
+    _i2.TierTagType? type,
     _i2.TierRating? rating,
     _i2.LineupPosition? position,
     String? reason,
@@ -154,6 +165,7 @@ class _TierTagImpl extends TierTag {
   }) {
     return TierTag(
       id: id is int? ? id : this.id,
+      type: type ?? this.type,
       rating: rating ?? this.rating,
       position: position ?? this.position,
       reason: reason ?? this.reason,
@@ -165,6 +177,11 @@ class _TierTagImpl extends TierTag {
 
 class TierTagTable extends _i1.Table {
   TierTagTable({super.tableRelation}) : super(tableName: 'tier_tag') {
+    type = _i1.ColumnEnum(
+      'type',
+      this,
+      _i1.EnumSerialization.byIndex,
+    );
     rating = _i1.ColumnEnum(
       'rating',
       this,
@@ -189,6 +206,8 @@ class TierTagTable extends _i1.Table {
     );
   }
 
+  late final _i1.ColumnEnum<_i2.TierTagType> type;
+
   late final _i1.ColumnEnum<_i2.TierRating> rating;
 
   late final _i1.ColumnEnum<_i2.LineupPosition> position;
@@ -202,6 +221,7 @@ class TierTagTable extends _i1.Table {
   @override
   List<_i1.Column> get columns => [
         id,
+        type,
         rating,
         position,
         reason,

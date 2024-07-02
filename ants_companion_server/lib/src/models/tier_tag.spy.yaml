@@ -1,6 +1,7 @@
 class: TierTag
 table: tier_tag
 fields:
+  type: TierTagType
   rating: TierRating
   position: LineupPosition
   # kind of want antType here so its as easy as getting all the tags

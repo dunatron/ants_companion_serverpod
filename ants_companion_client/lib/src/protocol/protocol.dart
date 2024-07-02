@@ -18,9 +18,10 @@ import 'example.dart' as _i6;
 import 'lineup_position.dart' as _i7;
 import 'tier_rating.dart' as _i8;
 import 'tier_tag.dart' as _i9;
-import 'protocol.dart' as _i10;
-import 'package:ants_companion_client/src/protocol/ant.dart' as _i11;
-import 'package:ants_companion_client/src/protocol/tier_tag.dart' as _i12;
+import 'tier_tag_type.dart' as _i10;
+import 'protocol.dart' as _i11;
+import 'package:ants_companion_client/src/protocol/ant.dart' as _i12;
+import 'package:ants_companion_client/src/protocol/tier_tag.dart' as _i13;
 export 'ant.dart';
 export 'ant_role.dart';
 export 'ant_type.dart';
@@ -29,6 +30,7 @@ export 'example.dart';
 export 'lineup_position.dart';
 export 'tier_rating.dart';
 export 'tier_tag.dart';
+export 'tier_tag_type.dart';
 export 'client.dart';
 
 class Protocol extends _i1.SerializationManager {
@@ -68,6 +70,9 @@ class Protocol extends _i1.SerializationManager {
     if (t == _i9.TierTag) {
       return _i9.TierTag.fromJson(data) as T;
     }
+    if (t == _i10.TierTagType) {
+      return _i10.TierTagType.fromJson(data) as T;
+    }
     if (t == _i1.getType<_i2.Ant?>()) {
       return (data != null ? _i2.Ant.fromJson(data) : null) as T;
     }
@@ -92,17 +97,20 @@ class Protocol extends _i1.SerializationManager {
     if (t == _i1.getType<_i9.TierTag?>()) {
       return (data != null ? _i9.TierTag.fromJson(data) : null) as T;
     }
-    if (t == _i1.getType<List<_i10.TierTag>?>()) {
+    if (t == _i1.getType<_i10.TierTagType?>()) {
+      return (data != null ? _i10.TierTagType.fromJson(data) : null) as T;
+    }
+    if (t == _i1.getType<List<_i11.TierTag>?>()) {
       return (data != null
-          ? (data as List).map((e) => deserialize<_i10.TierTag>(e)).toList()
+          ? (data as List).map((e) => deserialize<_i11.TierTag>(e)).toList()
           : null) as dynamic;
     }
-    if (t == List<_i11.Ant>) {
-      return (data as List).map((e) => deserialize<_i11.Ant>(e)).toList()
+    if (t == List<_i12.Ant>) {
+      return (data as List).map((e) => deserialize<_i12.Ant>(e)).toList()
           as dynamic;
     }
-    if (t == List<_i12.TierTag>) {
-      return (data as List).map((e) => deserialize<_i12.TierTag>(e)).toList()
+    if (t == List<_i13.TierTag>) {
+      return (data as List).map((e) => deserialize<_i13.TierTag>(e)).toList()
           as dynamic;
     }
     return super.deserialize<T>(data, t);
@@ -134,6 +142,9 @@ class Protocol extends _i1.SerializationManager {
     if (data is _i9.TierTag) {
       return 'TierTag';
     }
+    if (data is _i10.TierTagType) {
+      return 'TierTagType';
+    }
     return super.getClassNameForObject(data);
   }
 
@@ -162,6 +173,9 @@ class Protocol extends _i1.SerializationManager {
     }
     if (data['className'] == 'TierTag') {
       return deserialize<_i9.TierTag>(data['data']);
+    }
+    if (data['className'] == 'TierTagType') {
+      return deserialize<_i10.TierTagType>(data['data']);
     }
     return super.deserializeByClassName(data);
   }

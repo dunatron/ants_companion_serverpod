@@ -12,10 +12,8 @@ class TierTagsEndpoint extends Endpoint {
   /// READ
 
   /// get a list of all tier tags in the database
-  Future<List<TierTag>> all(Session session, int antId) async {
-    return await TierTag.db.find(
-      session,
-    );
+  Future<List<TierTag>> all(Session session) async {
+    return await TierTag.db.find(session);
   }
 
   /// get all the tier tags for an ant by the id

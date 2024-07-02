@@ -14,6 +14,7 @@ import 'protocol.dart' as _i2;
 abstract class TierTag implements _i1.SerializableModel {
   TierTag._({
     this.id,
+    required this.type,
     required this.rating,
     required this.position,
     required this.reason,
@@ -23,6 +24,7 @@ abstract class TierTag implements _i1.SerializableModel {
 
   factory TierTag({
     int? id,
+    required _i2.TierTagType type,
     required _i2.TierRating rating,
     required _i2.LineupPosition position,
     required String reason,
@@ -33,6 +35,7 @@ abstract class TierTag implements _i1.SerializableModel {
   factory TierTag.fromJson(Map<String, dynamic> jsonSerialization) {
     return TierTag(
       id: jsonSerialization['id'] as int?,
+      type: _i2.TierTagType.fromJson((jsonSerialization['type'] as int)),
       rating: _i2.TierRating.fromJson((jsonSerialization['rating'] as int)),
       position:
           _i2.LineupPosition.fromJson((jsonSerialization['position'] as int)),
@@ -48,6 +51,8 @@ abstract class TierTag implements _i1.SerializableModel {
   /// the id will be null.
   int? id;
 
+  _i2.TierTagType type;
+
   _i2.TierRating rating;
 
   _i2.LineupPosition position;
@@ -60,6 +65,7 @@ abstract class TierTag implements _i1.SerializableModel {
 
   TierTag copyWith({
     int? id,
+    _i2.TierTagType? type,
     _i2.TierRating? rating,
     _i2.LineupPosition? position,
     String? reason,
@@ -70,6 +76,7 @@ abstract class TierTag implements _i1.SerializableModel {
   Map<String, dynamic> toJson() {
     return {
       if (id != null) 'id': id,
+      'type': type.toJson(),
       'rating': rating.toJson(),
       'position': position.toJson(),
       'reason': reason,
@@ -89,6 +96,7 @@ class _Undefined {}
 class _TierTagImpl extends TierTag {
   _TierTagImpl({
     int? id,
+    required _i2.TierTagType type,
     required _i2.TierRating rating,
     required _i2.LineupPosition position,
     required String reason,
@@ -96,6 +104,7 @@ class _TierTagImpl extends TierTag {
     required int antId,
   }) : super._(
           id: id,
+          type: type,
           rating: rating,
           position: position,
           reason: reason,
@@ -106,6 +115,7 @@ class _TierTagImpl extends TierTag {
   @override
   TierTag copyWith({
     Object? id = _Undefined,
+    _i2.TierTagType? type,
     _i2.TierRating? rating,
     _i2.LineupPosition? position,
     String? reason,
@@ -114,6 +124,7 @@ class _TierTagImpl extends TierTag {
   }) {
     return TierTag(
       id: id is int? ? id : this.id,
+      type: type ?? this.type,
       rating: rating ?? this.rating,
       position: position ?? this.position,
       reason: reason ?? this.reason,

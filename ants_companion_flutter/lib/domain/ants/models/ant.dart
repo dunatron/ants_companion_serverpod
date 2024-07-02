@@ -1,4 +1,5 @@
-import 'package:ants_companion_flutter/domain/models/ant_tier_tag.dart';
+import 'package:ants_companion_flutter/domain/ants/models/ant_role.dart';
+import 'package:ants_companion_flutter/domain/ants/models/ant_type.dart';
 import 'package:equatable/equatable.dart';
 
 class Ant extends Equatable {
@@ -6,7 +7,8 @@ class Ant extends Equatable {
     required this.id,
     required this.name,
     required this.description,
-    required this.tierTags,
+    required this.type,
+    required this.role,
   });
 
   /// the unique id for the ant
@@ -18,29 +20,25 @@ class Ant extends Equatable {
   /// description of the ant
   final String description;
 
-  final List<AntTierTag> tierTags;
+  final AntType type;
+
+  final AntRole role;
 
   factory Ant.createNew({
     required String name,
     required String description,
+    required AntType type,
+    required AntRole role,
   }) {
     return Ant(
       id: '',
+      type: type,
+      role: role,
       name: name,
       description: description,
-      tierTags: const [],
     );
   }
 
-  Map<String, dynamic> toMap() {
-    return {
-      'id': id,
-      'name': name,
-      'description': description,
-      'tierTags': tierTags.map((it) => it.toMap()).toList(),
-    };
-  }
-
   @override
-  List<Object?> get props => [name, description];
+  List<Object?> get props => [id, name, type, role, description];
 }

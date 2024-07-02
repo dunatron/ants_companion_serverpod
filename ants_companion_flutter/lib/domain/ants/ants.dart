@@ -1,4 +1,4 @@
-import 'package:ants_companion_flutter/domain/models/ant.dart';
+import 'package:ants_companion_flutter/domain/ants/models/ant.dart';
 
 class Ants {
   const Ants(this._provider);

@@ -107,11 +107,11 @@ class EndpointTierTags extends _i1.EndpointRef {
 
   /// READ
   /// get a list of all tier tags in the database
-  _i2.Future<List<_i4.TierTag>> all(int antId) =>
+  _i2.Future<List<_i4.TierTag>> all() =>
       caller.callServerEndpoint<List<_i4.TierTag>>(
         'tierTags',
         'all',
-        {'antId': antId},
+        {},
       );
 
   /// get all the tier tags for an ant by the id

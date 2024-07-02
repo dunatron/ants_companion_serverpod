@@ -18,6 +18,14 @@ class AdminScreen extends StatelessWidget {
             },
             child: const Text('Create Ant'),
           ),
+        ),
+        SliverToBoxAdapter(
+          child: ElevatedButton(
+            onPressed: () {
+              context.go('/admin/create-tier-tag');
+            },
+            child: const Text('Create Tier Tag'),
+          ),
         )
       ],
     );

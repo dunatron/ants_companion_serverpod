@@ -1,5 +1,5 @@
-import 'package:ants_companion_flutter/domain/ants.dart';
-import 'package:ants_companion_flutter/domain/models/ant.dart';
+import 'package:ants_companion_flutter/domain/ants/ants.dart';
+import 'package:ants_companion_flutter/domain/ants/models/ant.dart';
 import 'package:ants_companion_flutter/ui/ants_carousel/ants_carousel.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';

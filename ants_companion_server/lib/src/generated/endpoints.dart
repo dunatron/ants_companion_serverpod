@@ -195,21 +195,12 @@ class Endpoints extends _i1.EndpointDispatch {
         ),
         'all': _i1.MethodConnector(
           name: 'all',
-          params: {
-            'antId': _i1.ParameterDescription(
-              name: 'antId',
-              type: _i1.getType<int>(),
-              nullable: false,
-            )
-          },
+          params: {},
           call: (
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['tierTags'] as _i5.TierTagsEndpoint).all(
-            session,
-            params['antId'],
-          ),
+              (endpoints['tierTags'] as _i5.TierTagsEndpoint).all(session),
         ),
         'tierTagsByAntId': _i1.MethodConnector(
           name: 'tierTagsByAntId',

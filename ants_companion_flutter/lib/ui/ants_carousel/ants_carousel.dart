@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:ants_companion_flutter/domain/models/ant.dart';
+import 'package:ants_companion_flutter/domain/ants/models/ant.dart';
 import 'package:ants_companion_flutter/ui/ant_card/ant_card.dart';
 import 'package:ants_companion_flutter/ui/draggable_scroll_configuration.dart';
 import 'package:ants_companion_flutter/ui/spacing.dart';
@@ -188,7 +188,7 @@ class _AntsCarouselState extends State<AntsCarousel>
   CarouselSlide _slide(Ant ant) => CarouselSlide(
         heroTag: ant.name,
         child: AntCard(
-          // ant: ant,
+          ant: ant,
           onImageTap: widget.onCardImageTap != null
               ? () => widget.onCardImageTap!(ant)
               : null,

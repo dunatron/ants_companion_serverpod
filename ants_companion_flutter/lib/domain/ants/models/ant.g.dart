@@ -22,7 +22,7 @@ class AntAdapter extends TypeAdapter<Ant> {
       description: fields[2] as String,
       type: fields[3] as AntType,
       role: fields[4] as AntRole,
-      profileImageUrl: fields[5] as String?,
+      profilePictureUrl: fields[5] as String?,
     );
   }
 
@@ -41,7 +41,7 @@ class AntAdapter extends TypeAdapter<Ant> {
       ..writeByte(4)
       ..write(obj.role)
       ..writeByte(5)
-      ..write(obj.profileImageUrl);
+      ..write(obj.profilePictureUrl);
   }
 
   @override

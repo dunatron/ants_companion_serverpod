@@ -1,5 +1,5 @@
 import 'package:ants_companion_client/ants_companion_client.dart' as api;
-import 'package:ants_companion_flutter/data/ants/models/ant_type.dart' as store;
+
 import 'package:ants_companion_flutter/domain/ants/models/ant_type.dart';
 
 extension ApiAntTypeFromDomainExtension on AntType {
@@ -9,13 +9,6 @@ extension ApiAntTypeFromDomainExtension on AntType {
         AntType.shooter => api.AntType.shooter,
         AntType.carrier => api.AntType.carrier,
         AntType.universal => api.AntType.universal,
-      };
-
-  store.AntType toStoreModel() => switch (this) {
-        AntType.guardian => store.AntType.guardian,
-        AntType.shooter => store.AntType.shooter,
-        AntType.carrier => store.AntType.carrier,
-        AntType.universal => store.AntType.universal,
       };
 }
 

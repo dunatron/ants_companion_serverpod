@@ -46,7 +46,7 @@ class AntsDatasource implements IAntsDatasource {
     final cachedAnts = await _local.getAll();
     if (cachedAnts.isNotEmpty) {
       logger.i('Returning ${cachedAnts.length} ants from cache');
-      return cachedAnts.toDomain();
+      return cachedAnts;
     }
 
     logger.i('No ants found in cache. Fetching from remote.');
@@ -58,7 +58,7 @@ class AntsDatasource implements IAntsDatasource {
 
     final ants = remoteAnts.toDomain();
 
-    await _local.putAll(ants.toStoreModel());
+    await _local.putAll(ants);
 
     logger.i('Returning ${ants.length} ants from remote');
 
@@ -73,7 +73,7 @@ class AntsDatasource implements IAntsDatasource {
     final response = await _remote.create(ant.toApiModel());
     final createdAnt = response.toDomain();
 
-    await _local.create(createdAnt.toStoreModel());
+    await _local.create(createdAnt);
 
     logger.i('Returning created ant ${createdAnt.name}');
 
@@ -87,7 +87,7 @@ class AntsDatasource implements IAntsDatasource {
     final response = await _remote.update(ant.toApiModel());
     final updatedAnt = response.toDomain();
 
-    await _local.update(updatedAnt.toStoreModel());
+    await _local.update(updatedAnt);
 
     logger.i('Returning updated ant ${updatedAnt.name}');
 
@@ -151,12 +151,7 @@ class AntsDatasource implements IAntsDatasource {
     if (antFromCache != null) {
       // its a bit cumbersome. domain models would be nice as Hive objects..
       // maybe... separation has pros though too
-      _local.update(
-        antFromCache
-            .toDomain()
-            .copyWith(profilePictureUrl: publicUrl)
-            .toStoreModel(),
-      );
+      _local.update(antFromCache.copyWith(profilePictureUrl: publicUrl));
     }
 
     return publicUrl;

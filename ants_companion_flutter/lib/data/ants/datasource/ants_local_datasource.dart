@@ -1,6 +1,6 @@
 import 'package:ants_companion_flutter/core/log/loggers.dart';
-import 'package:ants_companion_flutter/data/ants/models/ant.dart';
 import 'package:ants_companion_flutter/data/exceptions/local_database_exception.dart';
+import 'package:ants_companion_flutter/domain/ants/models/ant.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 class AntsLocalDatasource {

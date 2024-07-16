@@ -1,9 +1,16 @@
+import 'package:ants_companion_flutter/domain/_store_model_type_ids.dart';
 import 'package:ants_companion_flutter/domain/ants/models/ant_role.dart';
 import 'package:ants_companion_flutter/domain/ants/models/ant_type.dart';
 import 'package:equatable/equatable.dart';
 
+import 'package:hive/hive.dart';
+
+part 'ant.g.dart';
+
 /// could seriously simplify it if we used freezed and hive here on our domain model
 /// we would be transforming data less and reduce boiler plate code
+///
+@HiveType(typeId: StoreModelTypeIds.ant)
 class Ant extends Equatable {
   const Ant({
     required this.id,
@@ -15,18 +22,24 @@ class Ant extends Equatable {
   });
 
   /// the unique id for the ant
+  @HiveField(0)
   final String id;
 
   /// name of the ant
+  @HiveField(1)
   final String name;
 
   /// description of the ant
+  @HiveField(2)
   final String description;
 
+  @HiveField(3)
   final AntType type;
 
+  @HiveField(4)
   final AntRole role;
 
+  @HiveField(5)
   final String? profilePictureUrl;
 
   factory Ant.createNew({

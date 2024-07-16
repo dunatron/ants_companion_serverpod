@@ -1,0 +1,4 @@
+exception: AntServerException
+fields:
+  message: String
+  errorType: ExceptionType

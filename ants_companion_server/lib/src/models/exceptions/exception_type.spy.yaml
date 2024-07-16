@@ -1,0 +1,22 @@
+enum: ExceptionType
+values:
+  # Thrown when the input provided by the user is invalid
+  - InvalidInputException
+  # Thrown when there is an authentication error
+  - AuthenticationException
+  # Thrown when a user tries to access a resource they don't have permission to
+  - AuthorizationException
+  # Thrown when a requested resource cannot be found
+  - ResourceNotFoundException
+  # Thrown when there is a database-related error
+  - DatabaseException
+  # Thrown when a service is unavailable
+  - ServiceUnavailableException
+  # Thrown when an operation times out
+  - TimeoutException
+  # Thrown when there is a conflict in the state, such as duplicate entries
+  - ConflictException
+  # Thrown when there is an internal server error
+  - InternalServerException
+  # Thrown when there is an error with an external service.
+  - ExternalServiceException

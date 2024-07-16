@@ -4,6 +4,10 @@ ants:
   - byId:
   - update:
   - delete:
+  - getUploadDescription:
+  - verifyUpload:
+  - setProfilePicture:
+  - getProfileUrl:
 example:
   - hello:
 theme:

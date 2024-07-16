@@ -1,0 +1,4 @@
+class: AntUpdateData
+fields:
+  name: String?
+  description: String?

@@ -19,6 +19,7 @@ abstract class Ant implements _i1.SerializableModel {
     required this.type,
     required this.role,
     required this.createdAt,
+    this.profilePictureUrl,
     this.tierTags,
   });
 
@@ -29,6 +30,7 @@ abstract class Ant implements _i1.SerializableModel {
     required _i2.AntType type,
     required _i2.AntRole role,
     required DateTime createdAt,
+    String? profilePictureUrl,
     List<_i2.TierTag>? tierTags,
   }) = _AntImpl;
 
@@ -41,6 +43,7 @@ abstract class Ant implements _i1.SerializableModel {
       role: _i2.AntRole.fromJson((jsonSerialization['role'] as int)),
       createdAt:
           _i1.DateTimeJsonExtension.fromJson(jsonSerialization['createdAt']),
+      profilePictureUrl: jsonSerialization['profilePictureUrl'] as String?,
       tierTags: (jsonSerialization['tierTags'] as List?)
           ?.map((e) => _i2.TierTag.fromJson((e as Map<String, dynamic>)))
           .toList(),
@@ -62,6 +65,8 @@ abstract class Ant implements _i1.SerializableModel {
 
   DateTime createdAt;
 
+  String? profilePictureUrl;
+
   List<_i2.TierTag>? tierTags;
 
   Ant copyWith({
@@ -71,6 +76,7 @@ abstract class Ant implements _i1.SerializableModel {
     _i2.AntType? type,
     _i2.AntRole? role,
     DateTime? createdAt,
+    String? profilePictureUrl,
     List<_i2.TierTag>? tierTags,
   });
   @override
@@ -82,6 +88,7 @@ abstract class Ant implements _i1.SerializableModel {
       'type': type.toJson(),
       'role': role.toJson(),
       'createdAt': createdAt.toJson(),
+      if (profilePictureUrl != null) 'profilePictureUrl': profilePictureUrl,
       if (tierTags != null)
         'tierTags': tierTags?.toJson(valueToJson: (v) => v.toJson()),
     };
@@ -103,6 +110,7 @@ class _AntImpl extends Ant {
     required _i2.AntType type,
     required _i2.AntRole role,
     required DateTime createdAt,
+    String? profilePictureUrl,
     List<_i2.TierTag>? tierTags,
   }) : super._(
           id: id,
@@ -111,6 +119,7 @@ class _AntImpl extends Ant {
           type: type,
           role: role,
           createdAt: createdAt,
+          profilePictureUrl: profilePictureUrl,
           tierTags: tierTags,
         );
 
@@ -122,6 +131,7 @@ class _AntImpl extends Ant {
     _i2.AntType? type,
     _i2.AntRole? role,
     DateTime? createdAt,
+    Object? profilePictureUrl = _Undefined,
     Object? tierTags = _Undefined,
   }) {
     return Ant(
@@ -131,6 +141,9 @@ class _AntImpl extends Ant {
       type: type ?? this.type,
       role: role ?? this.role,
       createdAt: createdAt ?? this.createdAt,
+      profilePictureUrl: profilePictureUrl is String?
+          ? profilePictureUrl
+          : this.profilePictureUrl,
       tierTags:
           tierTags is List<_i2.TierTag>? ? tierTags : this.tierTags?.clone(),
     );

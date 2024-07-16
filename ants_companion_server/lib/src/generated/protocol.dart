@@ -14,20 +14,26 @@ import 'package:serverpod/protocol.dart' as _i2;
 import 'ant.dart' as _i3;
 import 'ant_role.dart' as _i4;
 import 'ant_type.dart' as _i5;
-import 'ants_theme.dart' as _i6;
-import 'example.dart' as _i7;
-import 'lineup_position.dart' as _i8;
-import 'tier_rating.dart' as _i9;
-import 'tier_tag.dart' as _i10;
-import 'tier_tag_type.dart' as _i11;
-import 'protocol.dart' as _i12;
-import 'package:ants_companion_server/src/generated/ant.dart' as _i13;
-import 'package:ants_companion_server/src/generated/tier_tag.dart' as _i14;
+import 'ant_update_data.dart' as _i6;
+import 'ants_theme.dart' as _i7;
+import 'example.dart' as _i8;
+import 'exceptions/exception_type.dart' as _i9;
+import 'exceptions/server_exception.dart' as _i10;
+import 'lineup_position.dart' as _i11;
+import 'tier_rating.dart' as _i12;
+import 'tier_tag.dart' as _i13;
+import 'tier_tag_type.dart' as _i14;
+import 'protocol.dart' as _i15;
+import 'package:ants_companion_server/src/generated/ant.dart' as _i16;
+import 'package:ants_companion_server/src/generated/tier_tag.dart' as _i17;
 export 'ant.dart';
 export 'ant_role.dart';
 export 'ant_type.dart';
+export 'ant_update_data.dart';
 export 'ants_theme.dart';
 export 'example.dart';
+export 'exceptions/exception_type.dart';
+export 'exceptions/server_exception.dart';
 export 'lineup_position.dart';
 export 'tier_rating.dart';
 export 'tier_tag.dart';
@@ -83,6 +89,12 @@ class Protocol extends _i1.SerializationManagerServer {
           columnType: _i2.ColumnType.timestampWithoutTimeZone,
           isNullable: false,
           dartType: 'DateTime',
+        ),
+        _i2.ColumnDefinition(
+          name: 'profilePictureUrl',
+          columnType: _i2.ColumnType.text,
+          isNullable: true,
+          dartType: 'String?',
         ),
       ],
       foreignKeys: [],
@@ -200,23 +212,32 @@ class Protocol extends _i1.SerializationManagerServer {
     if (t == _i5.AntType) {
       return _i5.AntType.fromJson(data) as T;
     }
-    if (t == _i6.AntsTheme) {
-      return _i6.AntsTheme.fromJson(data) as T;
+    if (t == _i6.AntUpdateData) {
+      return _i6.AntUpdateData.fromJson(data) as T;
     }
-    if (t == _i7.Example) {
-      return _i7.Example.fromJson(data) as T;
+    if (t == _i7.AntsTheme) {
+      return _i7.AntsTheme.fromJson(data) as T;
     }
-    if (t == _i8.LineupPosition) {
-      return _i8.LineupPosition.fromJson(data) as T;
+    if (t == _i8.Example) {
+      return _i8.Example.fromJson(data) as T;
     }
-    if (t == _i9.TierRating) {
-      return _i9.TierRating.fromJson(data) as T;
+    if (t == _i9.ExceptionType) {
+      return _i9.ExceptionType.fromJson(data) as T;
     }
-    if (t == _i10.TierTag) {
-      return _i10.TierTag.fromJson(data) as T;
+    if (t == _i10.AntServerException) {
+      return _i10.AntServerException.fromJson(data) as T;
     }
-    if (t == _i11.TierTagType) {
-      return _i11.TierTagType.fromJson(data) as T;
+    if (t == _i11.LineupPosition) {
+      return _i11.LineupPosition.fromJson(data) as T;
+    }
+    if (t == _i12.TierRating) {
+      return _i12.TierRating.fromJson(data) as T;
+    }
+    if (t == _i13.TierTag) {
+      return _i13.TierTag.fromJson(data) as T;
+    }
+    if (t == _i14.TierTagType) {
+      return _i14.TierTagType.fromJson(data) as T;
     }
     if (t == _i1.getType<_i3.Ant?>()) {
       return (data != null ? _i3.Ant.fromJson(data) : null) as T;
@@ -227,35 +248,45 @@ class Protocol extends _i1.SerializationManagerServer {
     if (t == _i1.getType<_i5.AntType?>()) {
       return (data != null ? _i5.AntType.fromJson(data) : null) as T;
     }
-    if (t == _i1.getType<_i6.AntsTheme?>()) {
-      return (data != null ? _i6.AntsTheme.fromJson(data) : null) as T;
+    if (t == _i1.getType<_i6.AntUpdateData?>()) {
+      return (data != null ? _i6.AntUpdateData.fromJson(data) : null) as T;
     }
-    if (t == _i1.getType<_i7.Example?>()) {
-      return (data != null ? _i7.Example.fromJson(data) : null) as T;
+    if (t == _i1.getType<_i7.AntsTheme?>()) {
+      return (data != null ? _i7.AntsTheme.fromJson(data) : null) as T;
     }
-    if (t == _i1.getType<_i8.LineupPosition?>()) {
-      return (data != null ? _i8.LineupPosition.fromJson(data) : null) as T;
+    if (t == _i1.getType<_i8.Example?>()) {
+      return (data != null ? _i8.Example.fromJson(data) : null) as T;
     }
-    if (t == _i1.getType<_i9.TierRating?>()) {
-      return (data != null ? _i9.TierRating.fromJson(data) : null) as T;
+    if (t == _i1.getType<_i9.ExceptionType?>()) {
+      return (data != null ? _i9.ExceptionType.fromJson(data) : null) as T;
     }
-    if (t == _i1.getType<_i10.TierTag?>()) {
-      return (data != null ? _i10.TierTag.fromJson(data) : null) as T;
+    if (t == _i1.getType<_i10.AntServerException?>()) {
+      return (data != null ? _i10.AntServerException.fromJson(data) : null)
+          as T;
     }
-    if (t == _i1.getType<_i11.TierTagType?>()) {
-      return (data != null ? _i11.TierTagType.fromJson(data) : null) as T;
+    if (t == _i1.getType<_i11.LineupPosition?>()) {
+      return (data != null ? _i11.LineupPosition.fromJson(data) : null) as T;
     }
-    if (t == _i1.getType<List<_i12.TierTag>?>()) {
+    if (t == _i1.getType<_i12.TierRating?>()) {
+      return (data != null ? _i12.TierRating.fromJson(data) : null) as T;
+    }
+    if (t == _i1.getType<_i13.TierTag?>()) {
+      return (data != null ? _i13.TierTag.fromJson(data) : null) as T;
+    }
+    if (t == _i1.getType<_i14.TierTagType?>()) {
+      return (data != null ? _i14.TierTagType.fromJson(data) : null) as T;
+    }
+    if (t == _i1.getType<List<_i15.TierTag>?>()) {
       return (data != null
-          ? (data as List).map((e) => deserialize<_i12.TierTag>(e)).toList()
+          ? (data as List).map((e) => deserialize<_i15.TierTag>(e)).toList()
           : null) as dynamic;
     }
-    if (t == List<_i13.Ant>) {
-      return (data as List).map((e) => deserialize<_i13.Ant>(e)).toList()
+    if (t == List<_i16.Ant>) {
+      return (data as List).map((e) => deserialize<_i16.Ant>(e)).toList()
           as dynamic;
     }
-    if (t == List<_i14.TierTag>) {
-      return (data as List).map((e) => deserialize<_i14.TierTag>(e)).toList()
+    if (t == List<_i17.TierTag>) {
+      return (data as List).map((e) => deserialize<_i17.TierTag>(e)).toList()
           as dynamic;
     }
     try {
@@ -275,22 +306,31 @@ class Protocol extends _i1.SerializationManagerServer {
     if (data is _i5.AntType) {
       return 'AntType';
     }
-    if (data is _i6.AntsTheme) {
+    if (data is _i6.AntUpdateData) {
+      return 'AntUpdateData';
+    }
+    if (data is _i7.AntsTheme) {
       return 'AntsTheme';
     }
-    if (data is _i7.Example) {
+    if (data is _i8.Example) {
       return 'Example';
     }
-    if (data is _i8.LineupPosition) {
+    if (data is _i9.ExceptionType) {
+      return 'ExceptionType';
+    }
+    if (data is _i10.AntServerException) {
+      return 'AntServerException';
+    }
+    if (data is _i11.LineupPosition) {
       return 'LineupPosition';
     }
-    if (data is _i9.TierRating) {
+    if (data is _i12.TierRating) {
       return 'TierRating';
     }
-    if (data is _i10.TierTag) {
+    if (data is _i13.TierTag) {
       return 'TierTag';
     }
-    if (data is _i11.TierTagType) {
+    if (data is _i14.TierTagType) {
       return 'TierTagType';
     }
     return super.getClassNameForObject(data);
@@ -307,23 +347,32 @@ class Protocol extends _i1.SerializationManagerServer {
     if (data['className'] == 'AntType') {
       return deserialize<_i5.AntType>(data['data']);
     }
+    if (data['className'] == 'AntUpdateData') {
+      return deserialize<_i6.AntUpdateData>(data['data']);
+    }
     if (data['className'] == 'AntsTheme') {
-      return deserialize<_i6.AntsTheme>(data['data']);
+      return deserialize<_i7.AntsTheme>(data['data']);
     }
     if (data['className'] == 'Example') {
-      return deserialize<_i7.Example>(data['data']);
+      return deserialize<_i8.Example>(data['data']);
+    }
+    if (data['className'] == 'ExceptionType') {
+      return deserialize<_i9.ExceptionType>(data['data']);
+    }
+    if (data['className'] == 'AntServerException') {
+      return deserialize<_i10.AntServerException>(data['data']);
     }
     if (data['className'] == 'LineupPosition') {
-      return deserialize<_i8.LineupPosition>(data['data']);
+      return deserialize<_i11.LineupPosition>(data['data']);
     }
     if (data['className'] == 'TierRating') {
-      return deserialize<_i9.TierRating>(data['data']);
+      return deserialize<_i12.TierRating>(data['data']);
     }
     if (data['className'] == 'TierTag') {
-      return deserialize<_i10.TierTag>(data['data']);
+      return deserialize<_i13.TierTag>(data['data']);
     }
     if (data['className'] == 'TierTagType') {
-      return deserialize<_i11.TierTagType>(data['data']);
+      return deserialize<_i14.TierTagType>(data['data']);
     }
     return super.deserializeByClassName(data);
   }
@@ -339,8 +388,8 @@ class Protocol extends _i1.SerializationManagerServer {
     switch (t) {
       case _i3.Ant:
         return _i3.Ant.t;
-      case _i10.TierTag:
-        return _i10.TierTag.t;
+      case _i13.TierTag:
+        return _i13.TierTag.t;
     }
     return null;
   }

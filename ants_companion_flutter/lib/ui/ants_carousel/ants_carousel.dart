@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:ants_companion_flutter/domain/ants/models/ant.dart';
 import 'package:ants_companion_flutter/ui/ant_card/ant_card.dart';
 import 'package:ants_companion_flutter/ui/draggable_scroll_configuration.dart';
@@ -218,12 +216,4 @@ extension on List<Ant> {
     }
     return -1;
   }
-}
-
-class CustomScrollBehavior extends MaterialScrollBehavior {
-  @override
-  Set<PointerDeviceKind> get dragDevices => {
-        PointerDeviceKind.touch,
-        PointerDeviceKind.mouse,
-      };
 }

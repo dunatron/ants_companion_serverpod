@@ -23,11 +23,20 @@ class Ant {
   @HiveField(4)
   final AntRole role;
 
+  @HiveField(5)
+  final String? profileImageUrl;
+
   Ant({
     required this.id,
     required this.name,
     required this.description,
     required this.type,
     required this.role,
+    required this.profileImageUrl,
   });
+
+  @override
+  String toString() {
+    return 'id: $id, name: $name, description: $description, role: $role, profileImageUrl: $profileImageUrl';
+  }
 }

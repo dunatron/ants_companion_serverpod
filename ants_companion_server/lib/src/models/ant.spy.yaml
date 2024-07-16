@@ -6,4 +6,5 @@ fields:
   type: AntType
   role: AntRole
   createdAt: DateTime
+  profilePictureUrl: String?
   tierTags: List<TierTag>?, relation(name=ant_tier_tags)

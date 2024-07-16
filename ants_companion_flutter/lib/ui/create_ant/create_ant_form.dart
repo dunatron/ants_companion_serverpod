@@ -1,8 +1,11 @@
+import 'package:ants_companion_flutter/core/log/loggers.dart';
 import 'package:ants_companion_flutter/common/sanitize_string.dart';
+import 'package:ants_companion_flutter/core/snackbar_service.dart';
 import 'package:ants_companion_flutter/domain/ants/ants.dart';
 import 'package:ants_companion_flutter/domain/ants/models/ant.dart';
 import 'package:ants_companion_flutter/domain/ants/models/ant_role.dart';
 import 'package:ants_companion_flutter/domain/ants/models/ant_type.dart';
+import 'package:ants_companion_flutter/domain/exceptions/exceptions.dart';
 import 'package:ants_companion_flutter/ui/inputs/multi_select/multi_select.dart';
 import 'package:ants_companion_flutter/ui/inputs/multi_select/multi_select_controller.dart';
 import 'package:ants_companion_flutter/ui/inputs/select_one_dropdown.dart';
@@ -23,6 +26,9 @@ class _CreateAntFormState extends State<CreateAntForm> {
   final _descriptionController = TextEditingController();
   final _passwordController = TextEditingController();
 
+  // final logger = LoggerSingleton.logger('CreateAntForm');
+  final logger = appLogger(CreateAntForm);
+
   AntType? _selectedAntType;
 
   @override
@@ -34,14 +40,28 @@ class _CreateAntFormState extends State<CreateAntForm> {
   }
 
   Future<void> _createAnt() async {
-    _ants.createAnt(
-      Ant.createNew(
-        type: _selectedAntType!,
-        name: sanitizeString(_nameController.text),
-        description: sanitizeString(_descriptionController.text),
-        role: AntRole.melee,
-      ),
-    );
+    try {
+      final createdAnt = await _ants.createAnt(
+        Ant.createNew(
+          type: _selectedAntType!,
+          name: sanitizeString(_nameController.text),
+          description: sanitizeString(_descriptionController.text),
+          role: AntRole.melee,
+        ),
+      );
+      // ScaffoldMessenger.of(context).showSnackBar(
+      //   SnackBar(content: Text('Created ant ${createdAnt.toString()}')),
+      // );
+      SnackbarService().showSnackbar(
+        'Created ant ${createdAnt.toString()}',
+        type: SnackbarType.info,
+      );
+    } on AppException catch (e, s) {
+      logger.e(e.message, stackTrace: s);
+      SnackbarService().showSnackbar(e.toString());
+    } catch (e) {
+      SnackbarService().showSnackbar(e.toString());
+    }
   }
 
   void _submitForm() {

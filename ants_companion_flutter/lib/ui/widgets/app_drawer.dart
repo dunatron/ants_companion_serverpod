@@ -33,6 +33,14 @@ class AppDrawer extends StatelessWidget {
           ),
           ListTile(
             leading: const Icon(Icons.message),
+            title: const Text('Onboarding'),
+            onTap: () {
+              Navigator.pop(context);
+              context.go('/onboarding');
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.message),
             title: const Text('Tier Ratings'),
             onTap: () {
               Navigator.pop(context);

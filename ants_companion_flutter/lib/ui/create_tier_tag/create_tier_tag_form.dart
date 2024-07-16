@@ -54,7 +54,15 @@ class _CreateTierTagFormState extends State<CreateTierTagForm> {
       _ => throw UnimplementedError(),
     };
 
-    _tierTags.create(tierTag);
+    try {
+      await _tierTags.create(tierTag);
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(e.toString()),
+        ),
+      );
+    }
   }
 
   void _submitForm() {

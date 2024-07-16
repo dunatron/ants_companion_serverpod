@@ -20,6 +20,7 @@ abstract class Ant extends _i1.TableRow implements _i1.ProtocolSerialization {
     required this.type,
     required this.role,
     required this.createdAt,
+    this.profilePictureUrl,
     this.tierTags,
   }) : super(id);
 
@@ -30,6 +31,7 @@ abstract class Ant extends _i1.TableRow implements _i1.ProtocolSerialization {
     required _i2.AntType type,
     required _i2.AntRole role,
     required DateTime createdAt,
+    String? profilePictureUrl,
     List<_i2.TierTag>? tierTags,
   }) = _AntImpl;
 
@@ -42,6 +44,7 @@ abstract class Ant extends _i1.TableRow implements _i1.ProtocolSerialization {
       role: _i2.AntRole.fromJson((jsonSerialization['role'] as int)),
       createdAt:
           _i1.DateTimeJsonExtension.fromJson(jsonSerialization['createdAt']),
+      profilePictureUrl: jsonSerialization['profilePictureUrl'] as String?,
       tierTags: (jsonSerialization['tierTags'] as List?)
           ?.map((e) => _i2.TierTag.fromJson((e as Map<String, dynamic>)))
           .toList(),
@@ -62,6 +65,8 @@ abstract class Ant extends _i1.TableRow implements _i1.ProtocolSerialization {
 
   DateTime createdAt;
 
+  String? profilePictureUrl;
+
   List<_i2.TierTag>? tierTags;
 
   @override
@@ -74,6 +79,7 @@ abstract class Ant extends _i1.TableRow implements _i1.ProtocolSerialization {
     _i2.AntType? type,
     _i2.AntRole? role,
     DateTime? createdAt,
+    String? profilePictureUrl,
     List<_i2.TierTag>? tierTags,
   });
   @override
@@ -85,6 +91,7 @@ abstract class Ant extends _i1.TableRow implements _i1.ProtocolSerialization {
       'type': type.toJson(),
       'role': role.toJson(),
       'createdAt': createdAt.toJson(),
+      if (profilePictureUrl != null) 'profilePictureUrl': profilePictureUrl,
       if (tierTags != null)
         'tierTags': tierTags?.toJson(valueToJson: (v) => v.toJson()),
     };
@@ -99,6 +106,7 @@ abstract class Ant extends _i1.TableRow implements _i1.ProtocolSerialization {
       'type': type.toJson(),
       'role': role.toJson(),
       'createdAt': createdAt.toJson(),
+      if (profilePictureUrl != null) 'profilePictureUrl': profilePictureUrl,
       if (tierTags != null)
         'tierTags': tierTags?.toJson(valueToJson: (v) => v.toJsonForProtocol()),
     };
@@ -144,6 +152,7 @@ class _AntImpl extends Ant {
     required _i2.AntType type,
     required _i2.AntRole role,
     required DateTime createdAt,
+    String? profilePictureUrl,
     List<_i2.TierTag>? tierTags,
   }) : super._(
           id: id,
@@ -152,6 +161,7 @@ class _AntImpl extends Ant {
           type: type,
           role: role,
           createdAt: createdAt,
+          profilePictureUrl: profilePictureUrl,
           tierTags: tierTags,
         );
 
@@ -163,6 +173,7 @@ class _AntImpl extends Ant {
     _i2.AntType? type,
     _i2.AntRole? role,
     DateTime? createdAt,
+    Object? profilePictureUrl = _Undefined,
     Object? tierTags = _Undefined,
   }) {
     return Ant(
@@ -172,6 +183,9 @@ class _AntImpl extends Ant {
       type: type ?? this.type,
       role: role ?? this.role,
       createdAt: createdAt ?? this.createdAt,
+      profilePictureUrl: profilePictureUrl is String?
+          ? profilePictureUrl
+          : this.profilePictureUrl,
       tierTags:
           tierTags is List<_i2.TierTag>? ? tierTags : this.tierTags?.clone(),
     );
@@ -202,6 +216,10 @@ class AntTable extends _i1.Table {
       'createdAt',
       this,
     );
+    profilePictureUrl = _i1.ColumnString(
+      'profilePictureUrl',
+      this,
+    );
   }
 
   late final _i1.ColumnString name;
@@ -213,6 +231,8 @@ class AntTable extends _i1.Table {
   late final _i1.ColumnEnum<_i2.AntRole> role;
 
   late final _i1.ColumnDateTime createdAt;
+
+  late final _i1.ColumnString profilePictureUrl;
 
   _i2.TierTagTable? ___tierTags;
 
@@ -257,6 +277,7 @@ class AntTable extends _i1.Table {
         type,
         role,
         createdAt,
+        profilePictureUrl,
       ];
 
   @override

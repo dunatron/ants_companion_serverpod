@@ -14,7 +14,9 @@ import '../endpoints/example_endpoint.dart' as _i3;
 import '../endpoints/theme_endpoint.dart' as _i4;
 import '../endpoints/tier_tags_endpoint.dart' as _i5;
 import 'package:ants_companion_server/src/generated/ant.dart' as _i6;
-import 'package:ants_companion_server/src/generated/tier_tag.dart' as _i7;
+import 'package:ants_companion_server/src/generated/ant_update_data.dart'
+    as _i7;
+import 'package:ants_companion_server/src/generated/tier_tag.dart' as _i8;
 
 class Endpoints extends _i1.EndpointDispatch {
   @override
@@ -101,7 +103,12 @@ class Endpoints extends _i1.EndpointDispatch {
               name: 'antId',
               type: _i1.getType<int>(),
               nullable: false,
-            )
+            ),
+            'data': _i1.ParameterDescription(
+              name: 'data',
+              type: _i1.getType<_i7.AntUpdateData>(),
+              nullable: false,
+            ),
           },
           call: (
             _i1.Session session,
@@ -110,6 +117,7 @@ class Endpoints extends _i1.EndpointDispatch {
               (endpoints['ants'] as _i2.AntsEndpoint).update(
             session,
             params['antId'],
+            params['data'],
           ),
         ),
         'delete': _i1.MethodConnector(
@@ -128,6 +136,84 @@ class Endpoints extends _i1.EndpointDispatch {
               (endpoints['ants'] as _i2.AntsEndpoint).delete(
             session,
             params['antId'],
+          ),
+        ),
+        'getUploadDescription': _i1.MethodConnector(
+          name: 'getUploadDescription',
+          params: {
+            'path': _i1.ParameterDescription(
+              name: 'path',
+              type: _i1.getType<String>(),
+              nullable: false,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['ants'] as _i2.AntsEndpoint).getUploadDescription(
+            session,
+            params['path'],
+          ),
+        ),
+        'verifyUpload': _i1.MethodConnector(
+          name: 'verifyUpload',
+          params: {
+            'path': _i1.ParameterDescription(
+              name: 'path',
+              type: _i1.getType<String>(),
+              nullable: false,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['ants'] as _i2.AntsEndpoint).verifyUpload(
+            session,
+            params['path'],
+          ),
+        ),
+        'setProfilePicture': _i1.MethodConnector(
+          name: 'setProfilePicture',
+          params: {
+            'antId': _i1.ParameterDescription(
+              name: 'antId',
+              type: _i1.getType<int>(),
+              nullable: false,
+            ),
+            'fileName': _i1.ParameterDescription(
+              name: 'fileName',
+              type: _i1.getType<String>(),
+              nullable: false,
+            ),
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['ants'] as _i2.AntsEndpoint).setProfilePicture(
+            session,
+            params['antId'],
+            params['fileName'],
+          ),
+        ),
+        'getProfileUrl': _i1.MethodConnector(
+          name: 'getProfileUrl',
+          params: {
+            'path': _i1.ParameterDescription(
+              name: 'path',
+              type: _i1.getType<String>(),
+              nullable: false,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['ants'] as _i2.AntsEndpoint).getProfileUrl(
+            session,
+            params['path'],
           ),
         ),
       },
@@ -180,7 +266,7 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'tag': _i1.ParameterDescription(
               name: 'tag',
-              type: _i1.getType<_i7.TierTag>(),
+              type: _i1.getType<_i8.TierTag>(),
               nullable: false,
             )
           },

@@ -1,6 +1,7 @@
 import 'package:ants_companion_flutter/bootstrap/router.dart';
 import 'package:ants_companion_flutter/common/theme/dark_color_scheme.dart';
 import 'package:ants_companion_flutter/common/theme/light_color_scheme.dart';
+import 'package:ants_companion_flutter/core/snackbar_service.dart';
 import 'package:flutter/material.dart';
 
 class App extends StatelessWidget {
@@ -11,6 +12,7 @@ class App extends StatelessWidget {
     return MaterialApp.router(
       title: 'Ants Companion',
       debugShowCheckedModeBanner: false,
+      scaffoldMessengerKey: SnackbarService().scaffoldMessengerKey,
       theme: ThemeData(
         useMaterial3: true,
         colorScheme: lightColorScheme,

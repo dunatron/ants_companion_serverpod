@@ -2,8 +2,10 @@ import 'package:ants_companion_flutter/ui/admin/admin_screen.dart';
 import 'package:ants_companion_flutter/ui/create_ant/create_ant_screen.dart';
 import 'package:ants_companion_flutter/ui/create_tier_tag/create_tier_tag_screen.dart';
 import 'package:ants_companion_flutter/ui/home/home_screen.dart';
+import 'package:ants_companion_flutter/ui/onboarding/onboarding_screen.dart';
 import 'package:ants_companion_flutter/ui/route_not_found/route_not_found_screen.dart';
 import 'package:ants_companion_flutter/ui/tier_ratings/tier_ratings_screen.dart';
+import 'package:ants_companion_flutter/ui/update_ant/update_ant_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
@@ -40,12 +42,26 @@ final routes = <RouteBase>[
                 const CreateAntScreen(),
           ),
           GoRoute(
+            path: 'update-ant/:antId',
+            builder: (BuildContext context, GoRouterState state) {
+              print('INTERESTING');
+              final antId = state.pathParameters['antId'];
+              return UpdateAntScreen(antId: antId!);
+            },
+          ),
+          GoRoute(
             path: 'create-tier-tag',
             builder: (BuildContext context, GoRouterState state) =>
                 const CreateTierTagScreen(),
           )
         ],
       ),
+      GoRoute(
+        path: 'onboarding',
+        builder: (BuildContext context, GoRouterState state) =>
+            const OnBoardingScreen(),
+      ),
+
       GoRoute(
         path: 'tier-ratings',
         builder: (BuildContext context, GoRouterState state) =>

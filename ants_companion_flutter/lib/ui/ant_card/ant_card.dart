@@ -3,34 +3,148 @@ import 'package:ants_companion_flutter/domain/tier_tags/tier_tags.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
+import 'package:ants_companion_flutter/domain/ants/models/ant.dart';
+import 'package:ants_companion_flutter/ui/widgets/ant_profile_image.dart';
+import 'package:flutter/material.dart';
 
 class AntCard extends StatelessWidget {
   const AntCard({
     super.key,
-    this.onImageTap,
     required this.ant,
+    this.onImageTap,
+    this.onEditIconTap,
+    this.onDeleteIconTap,
   });
 
   final Ant ant;
 
   final Function()? onImageTap;
 
+  final Function()? onEditIconTap;
+
+  final Function()? onDeleteIconTap;
+
+  /// ToDo: extract to on the card
+  void _showTierTagsModal(
+    BuildContext context,
+    Ant ant,
+  ) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return const Dialog(child: Card(child: Text('ToDo')));
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Card(
-      child: Column(
-        children: [
-          Text(ant.name),
-          // Text(ant.tierTags.join(', ')),
-          AntTierTags(
-            antId: ant.id,
-          ),
-          ElevatedButton(
-            onPressed: onImageTap,
-            child: Text('Image Tap'),
-          )
-        ],
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Expanded(
+                    child: Text(
+                  ant.name,
+                  style: Theme.of(context).textTheme.bodyLarge,
+                )),
+                IconButton(onPressed: onEditIconTap, icon: Icon(Icons.edit)),
+                IconButton(onPressed: onDeleteIconTap, icon: Icon(Icons.delete))
+              ],
+            ),
+            const SizedBox(height: 8),
+            _buildProfileRow(context, ant),
+            const SizedBox(height: 8),
+            // Expanded(child: Container()),
+            Row(
+              children: [
+                const Expanded(child: SizedBox()),
+                InkWell(
+                  onTap: () => _showTierTagsModal(context, ant),
+                  child: _tierRatingsRow(context, ant),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
+    );
+  }
+
+  Row _buildProfileRow(BuildContext context, Ant ant) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        GestureDetector(
+          onTap: onImageTap,
+          // child: AntProfileImage(imagePath: 'assets/ants/golden_crystal.jpg'),
+          child: AntProfileImage(src: ant.profilePictureUrl ?? ''),
+        ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            Text(
+              ant.role.name,
+              style: Theme.of(context).textTheme.labelSmall,
+            ),
+            Text(
+              ant.type.name,
+              style: Theme.of(context).textTheme.labelSmall,
+            ),
+          ],
+        )
+      ],
+    );
+  }
+
+  Row _tierRatingsRow(BuildContext context, Ant ant) {
+    return Row(
+      children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Text(
+              'PVE',
+              style: Theme.of(context).textTheme.labelSmall,
+              textAlign: TextAlign.end,
+            ),
+            Text(
+              // ant.topPveRating().displayText,
+              'F',
+              // style: Theme.of(context)
+              //     .textTheme
+              //     .headlineSmall
+              //     ?.copyWith(color: ant.topPveRating().color),
+              textAlign: TextAlign.center,
+            )
+          ],
+        ),
+        const SizedBox(width: 16),
+        AntTierTags(antId: ant.id)
+        // Column(
+        //   crossAxisAlignment: CrossAxisAlignment.start,
+        //   children: [
+        //     Text(
+        //       'PVP',
+        //       style: Theme.of(context).textTheme.labelSmall,
+        //       textAlign: TextAlign.end,
+        //     ),
+        //     Text('F'
+        //         // ant.topPvpRating().displayText,
+        //         // style: Theme.of(context)
+        //         //     .textTheme
+        //         //     .headlineSmall
+        //         //     ?.copyWith(color: ant.topPvpRating().color),
+        //         )
+        //   ],
+        // )
+      ],
     );
   }
 }

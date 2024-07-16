@@ -1,4 +1,3 @@
-import 'package:ants_companion_flutter/domain/ants/models/ant_type.dart';
 import 'package:ants_companion_flutter/domain/tier_tags/models/lineup_position.dart';
 import 'package:ants_companion_flutter/domain/tier_tags/models/tier_rating.dart';
 import 'package:equatable/equatable.dart';

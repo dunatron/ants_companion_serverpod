@@ -1,4 +1,7 @@
+import 'dart:typed_data';
+
 import 'package:ants_companion_flutter/domain/ants/models/ant.dart';
+import 'package:file_picker/file_picker.dart';
 
 class Ants {
   const Ants(this._provider);
@@ -12,6 +15,24 @@ class Ants {
 
   Future<Ant> createAnt(Ant ant) => _provider.createAnt(ant);
 
+  Future<Ant> updateAnt(Ant ant) => _provider.updateAnt(ant);
+
+  // Future<String> setAntProfilePicture(
+  //   final String antId,
+  //   String fileName,
+  //   ByteData byteData,
+  // ) =>
+  //     _provider.setAntProfilePicture(antId, fileName, byteData);
+
+  Future<String> setAntProfilePicture(
+    final String antId,
+    String fileName,
+    PlatformFile byteData,
+  ) =>
+      _provider.setAntProfilePicture(antId, fileName, byteData);
+
+  Future<Ant> deleteAnt(String antId) => _provider.deleteAnt(antId);
+
   Future<void> refresh() => _provider.refresh();
 }
 
@@ -21,6 +42,22 @@ abstract class AntsProvider {
   Future<Ant?> antById(String id);
 
   Future<Ant> createAnt(Ant ant);
+
+  Future<Ant> updateAnt(Ant ant);
+
+  Future<Ant> deleteAnt(String antId);
+
+  // Future<String> setAntProfilePicture(
+  //   final String antId,
+  //   String fileName,
+  //   ByteData byteData,
+  // );
+
+  Future<String> setAntProfilePicture(
+    final String antId,
+    String fileName,
+    PlatformFile byteData,
+  );
 
   Future<void> refresh();
 }

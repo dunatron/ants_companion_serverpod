@@ -67,19 +67,30 @@ class HomeScreen extends StatelessWidget {
             ],
           ),
         ),
-        SliverToBoxAdapter(
-          child: AllAntsCarousel(
-            onItemImageTap: (final ant) => _launchAntDetails(ant, context),
-          ),
-        ),
-        SliverList.builder(
-          itemCount: 100,
-          itemBuilder: (context, index) {
-            return ListTile(
-              title: Text('Index: $index'),
+        // SliverToBoxAdapter(
+        //   child: AllAntsCarousel(
+        //     onItemImageTap: (final ant) => _launchAntDetails(ant, context),
+        //   ),
+        // ),
+        StreamBuilder(
+          stream: _ants.antsList(),
+          builder: (context, snapshot) {
+            final data = snapshot.data;
+
+            if (data == null) {
+              return SliverToBoxAdapter(child: Container());
+            }
+            return SliverList.builder(
+              itemCount: data.length,
+              itemBuilder: (context, index) {
+                final ant = data[index];
+                return ListTile(
+                  title: Text('${ant.name}'),
+                );
+              },
             );
           },
-        ),
+        )
       ],
     );
   }

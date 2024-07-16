@@ -1,5 +1,6 @@
 import 'package:logger/logger.dart';
 
+/// Prints the className and method followed by the message
 class FunctionNamePrinter extends PrettyPrinter {
   FunctionNamePrinter({
     super.methodCount = 0,

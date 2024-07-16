@@ -16,11 +16,13 @@ extension AntsListFromDomainExtension on List<Ant> {
 
 extension AntFromDomainExtension on Ant {
   api.Ant toApiModel() => api.Ant(
+        id: int.tryParse(id),
         name: name,
         description: description,
         type: type.toApiModel(),
         role: role.toApiModel(),
         createdAt: DateTime.now(),
+        profilePictureUrl: profilePictureUrl,
       );
 
   store.Ant toStoreModel() => store.Ant(
@@ -29,18 +31,24 @@ extension AntFromDomainExtension on Ant {
         description: description,
         type: type.toStoreModel(),
         role: role.toStoreModel(),
+        profileImageUrl: profilePictureUrl,
         // createdAt: DateTime.now(),
       );
 }
 
 extension AntApiModelToDomainExtension on api.Ant {
   Ant toDomain() => Ant(
-        id: id.toString(),
-        name: name,
-        description: description,
-        type: type.toDomain(),
-        role: role.toDomain(),
-      );
+      id: id.toString(),
+      name: name,
+      description: description,
+      type: type.toDomain(),
+      role: role.toDomain(),
+      // profilePictureUrl: profilePictureUrl,
+      // ToDo: don't do this
+      // profilePictureUrl:
+      //     'http://localhost:8080/serverpod_cloud_storage?method=file&path=$profilePictureUrl');
+      profilePictureUrl:
+          'http://192.168.20.7:8080/serverpod_cloud_storage?method=file&path=$profilePictureUrl');
 }
 
 extension AntsListStoreModelToDomainExtension on List<store.Ant> {
@@ -54,5 +62,6 @@ extension AntStoreModelToDomainExtension on store.Ant {
         description: description,
         type: AntType.carrier,
         role: AntRole.melee,
+        profilePictureUrl: profileImageUrl,
       );
 }

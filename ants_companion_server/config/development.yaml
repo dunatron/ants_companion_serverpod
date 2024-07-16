@@ -9,7 +9,9 @@
 # Configuration for the main API server.
 apiServer:
   port: 8080
-  publicHost: localhost
+  # publicHost: localhost
+  publicHost: 192.168.20.7
+  # publicHost: 10.0.2.2 # to connect to local machine for android development
   publicPort: 8080
   publicScheme: http
 

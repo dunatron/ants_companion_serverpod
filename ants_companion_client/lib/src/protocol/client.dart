@@ -11,8 +11,9 @@
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 import 'dart:async' as _i2;
 import 'package:ants_companion_client/src/protocol/ant.dart' as _i3;
-import 'package:ants_companion_client/src/protocol/tier_tag.dart' as _i4;
-import 'protocol.dart' as _i5;
+import 'package:ants_companion_client/src/protocol/ant_update_data.dart' as _i4;
+import 'package:ants_companion_client/src/protocol/tier_tag.dart' as _i5;
+import 'protocol.dart' as _i6;
 
 /// {@category Endpoint}
 class EndpointAnts extends _i1.EndpointRef {
@@ -46,10 +47,17 @@ class EndpointAnts extends _i1.EndpointRef {
 
   /// UPDATE
   /// update a an ant record in the database
-  _i2.Future<_i3.Ant?> update(int antId) => caller.callServerEndpoint<_i3.Ant?>(
+  _i2.Future<_i3.Ant?> update(
+    int antId,
+    _i4.AntUpdateData data,
+  ) =>
+      caller.callServerEndpoint<_i3.Ant?>(
         'ants',
         'update',
-        {'antId': antId},
+        {
+          'antId': antId,
+          'data': data,
+        },
       );
 
   /// DELETE
@@ -58,6 +66,39 @@ class EndpointAnts extends _i1.EndpointRef {
         'ants',
         'delete',
         {'antId': antId},
+      );
+
+  _i2.Future<String?> getUploadDescription(String path) =>
+      caller.callServerEndpoint<String?>(
+        'ants',
+        'getUploadDescription',
+        {'path': path},
+      );
+
+  _i2.Future<bool> verifyUpload(String path) => caller.callServerEndpoint<bool>(
+        'ants',
+        'verifyUpload',
+        {'path': path},
+      );
+
+  _i2.Future<void> setProfilePicture(
+    int antId,
+    String fileName,
+  ) =>
+      caller.callServerEndpoint<void>(
+        'ants',
+        'setProfilePicture',
+        {
+          'antId': antId,
+          'fileName': fileName,
+        },
+      );
+
+  _i2.Future<String?> getProfileUrl(String path) =>
+      caller.callServerEndpoint<String?>(
+        'ants',
+        'getProfileUrl',
+        {'path': path},
       );
 }
 
@@ -98,8 +139,8 @@ class EndpointTierTags extends _i1.EndpointRef {
 
   /// CREATE
   /// create a new tier tag
-  _i2.Future<_i4.TierTag> create(_i4.TierTag tag) =>
-      caller.callServerEndpoint<_i4.TierTag>(
+  _i2.Future<_i5.TierTag> create(_i5.TierTag tag) =>
+      caller.callServerEndpoint<_i5.TierTag>(
         'tierTags',
         'create',
         {'tag': tag},
@@ -107,16 +148,16 @@ class EndpointTierTags extends _i1.EndpointRef {
 
   /// READ
   /// get a list of all tier tags in the database
-  _i2.Future<List<_i4.TierTag>> all() =>
-      caller.callServerEndpoint<List<_i4.TierTag>>(
+  _i2.Future<List<_i5.TierTag>> all() =>
+      caller.callServerEndpoint<List<_i5.TierTag>>(
         'tierTags',
         'all',
         {},
       );
 
   /// get all the tier tags for an ant by the id
-  _i2.Future<List<_i4.TierTag>> tierTagsByAntId(int antId) =>
-      caller.callServerEndpoint<List<_i4.TierTag>>(
+  _i2.Future<List<_i5.TierTag>> tierTagsByAntId(int antId) =>
+      caller.callServerEndpoint<List<_i5.TierTag>>(
         'tierTags',
         'tierTagsByAntId',
         {'antId': antId},
@@ -124,8 +165,8 @@ class EndpointTierTags extends _i1.EndpointRef {
 
   /// UPDATE
   /// update a tier tag
-  _i2.Future<_i4.TierTag?> update(int tierTagId) =>
-      caller.callServerEndpoint<_i4.TierTag?>(
+  _i2.Future<_i5.TierTag?> update(int tierTagId) =>
+      caller.callServerEndpoint<_i5.TierTag?>(
         'tierTags',
         'update',
         {'tierTagId': tierTagId},
@@ -133,8 +174,8 @@ class EndpointTierTags extends _i1.EndpointRef {
 
   /// DELETE
   /// delete a tier tag
-  _i2.Future<_i4.TierTag?> delete(int tierTagId) =>
-      caller.callServerEndpoint<_i4.TierTag?>(
+  _i2.Future<_i5.TierTag?> delete(int tierTagId) =>
+      caller.callServerEndpoint<_i5.TierTag?>(
         'tierTags',
         'delete',
         {'tierTagId': tierTagId},
@@ -156,7 +197,7 @@ class Client extends _i1.ServerpodClient {
     Function(_i1.MethodCallContext)? onSucceededCall,
   }) : super(
           host,
-          _i5.Protocol(),
+          _i6.Protocol(),
           securityContext: securityContext,
           authenticationKeyManager: authenticationKeyManager,
           streamingConnectionTimeout: streamingConnectionTimeout,

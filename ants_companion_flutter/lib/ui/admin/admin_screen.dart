@@ -1,3 +1,4 @@
+import 'package:ants_companion_flutter/ui/admin/admin_ants_list.dart';
 import 'package:ants_companion_flutter/ui/layouts/page_layout.dart';
 import 'package:flutter/material.dart';
 
@@ -8,7 +9,10 @@ class AdminScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final scrollController = ScrollController();
+
     return PageLayout(
+      controller: scrollController,
       title: 'Admin Area',
       slivers: [
         SliverToBoxAdapter(
@@ -26,7 +30,8 @@ class AdminScreen extends StatelessWidget {
             },
             child: const Text('Create Tier Tag'),
           ),
-        )
+        ),
+        AdminAntsList(),
       ],
     );
   }

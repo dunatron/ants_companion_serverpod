@@ -7,6 +7,10 @@ import 'package:go_router/go_router.dart';
 class AdminScreen extends StatelessWidget {
   const AdminScreen({super.key});
 
+  _goToCreateAntScreen(BuildContext context) {
+    context.go('/admin/create-ant');
+  }
+
   @override
   Widget build(BuildContext context) {
     final scrollController = ScrollController();
@@ -14,24 +18,26 @@ class AdminScreen extends StatelessWidget {
     return PageLayout(
       controller: scrollController,
       title: 'Admin Area',
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () => _goToCreateAntScreen(context),
+        label: const Text('Add Ant'),
+      ),
       slivers: [
-        SliverToBoxAdapter(
-          child: ElevatedButton(
-            onPressed: () {
-              context.go('/admin/create-ant');
-            },
-            child: const Text('Create Ant'),
-          ),
-        ),
-        SliverToBoxAdapter(
-          child: ElevatedButton(
-            onPressed: () {
-              context.go('/admin/create-tier-tag');
-            },
-            child: const Text('Create Tier Tag'),
+        SliverPadding(
+          padding: const EdgeInsets.all(24),
+          sliver: SliverToBoxAdapter(
+            child: Row(
+              children: [
+                ElevatedButton(
+                  onPressed: () => _goToCreateAntScreen(context),
+                  child: const Text('Create Ant'),
+                )
+              ],
+            ),
           ),
         ),
         AdminAntsList(),
+        const SliverToBoxAdapter(child: SizedBox(height: 80)),
       ],
     );
   }

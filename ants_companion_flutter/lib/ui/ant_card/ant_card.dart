@@ -2,27 +2,21 @@ import 'package:ants_companion_flutter/domain/ants/models/ant.dart';
 import 'package:ants_companion_flutter/domain/tier_tags/tier_tags.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:go_router/go_router.dart';
-import 'package:ants_companion_flutter/domain/ants/models/ant.dart';
 import 'package:ants_companion_flutter/ui/widgets/ant_profile_image.dart';
-import 'package:flutter/material.dart';
 
 class AntCard extends StatelessWidget {
   const AntCard({
     super.key,
     required this.ant,
     this.onImageTap,
-    this.onEditIconTap,
-    this.onDeleteIconTap,
+    this.actions,
   });
 
   final Ant ant;
 
+  final Widget? actions;
+
   final Function()? onImageTap;
-
-  final Function()? onEditIconTap;
-
-  final Function()? onDeleteIconTap;
 
   /// ToDo: extract to on the card
   void _showTierTagsModal(
@@ -39,6 +33,8 @@ class AntCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // ignore: no_leading_underscores_for_local_identifiers
+    final _actions = actions;
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(16),
@@ -48,14 +44,15 @@ class AntCard extends StatelessWidget {
             Row(
               children: [
                 Expanded(
-                    child: Text(
-                  ant.name,
-                  style: Theme.of(context).textTheme.bodyLarge,
-                )),
-                IconButton(onPressed: onEditIconTap, icon: Icon(Icons.edit)),
-                IconButton(onPressed: onDeleteIconTap, icon: Icon(Icons.delete))
+                  child: Text(
+                    ant.name,
+                    style: Theme.of(context).textTheme.bodyLarge,
+                  ),
+                ),
+                if (_actions != null) _actions,
               ],
             ),
+
             const SizedBox(height: 8),
             _buildProfileRow(context, ant),
             const SizedBox(height: 8),
@@ -82,7 +79,6 @@ class AntCard extends StatelessWidget {
       children: [
         GestureDetector(
           onTap: onImageTap,
-          // child: AntProfileImage(imagePath: 'assets/ants/golden_crystal.jpg'),
           child: AntProfileImage(src: ant.profilePictureUrl ?? ''),
         ),
         Column(

@@ -1,6 +1,7 @@
 import 'package:ants_companion_flutter/core/snackbar_service.dart';
 import 'package:ants_companion_flutter/domain/ants/ants.dart';
 import 'package:ants_companion_flutter/domain/ants/models/ant.dart';
+import 'package:ants_companion_flutter/ui/ant_card/ant_admin_actions.dart';
 import 'package:ants_companion_flutter/ui/ant_card/ant_card.dart';
 import 'package:ants_companion_flutter/ui/widgets/sliver_generic_grid.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +15,10 @@ class AdminAntsList extends StatelessWidget {
 
   void _goToEditAnt(BuildContext context, String antId) {
     context.go('/admin/update-ant/$antId');
+  }
+
+  void _goToAddTierTag(BuildContext context, String antId) {
+    context.go('/admin/create-tier-tag');
   }
 
   @override
@@ -44,8 +49,11 @@ class AdminAntsList extends StatelessWidget {
             itemBuilder: (ant, index) {
               return AntCard(
                 ant: ant,
-                onEditIconTap: () => _goToEditAnt(context, ant.id),
-                onDeleteIconTap: () async => _confirmAndDelete(context, ant),
+                actions: AntAdminActions(
+                  onDeleteIconTap: () => _confirmAndDelete(context, ant),
+                  onEditIconTap: () => _goToEditAnt(context, ant.id),
+                  createTierTag: () => _goToAddTierTag(context, ant.id),
+                ),
               );
             },
           );
@@ -72,9 +80,10 @@ class AdminAntsList extends StatelessWidget {
               confirmDismiss: (direction) => _confirmAndDelete(context, ant),
               child: ListTile(
                 title: Text(ant.name),
-                trailing: IconButton(
-                  onPressed: () => _goToEditAnt(context, ant.id),
-                  icon: const Icon(Icons.edit),
+                trailing: AntAdminActions(
+                  onDeleteIconTap: () => _confirmAndDelete(context, ant),
+                  onEditIconTap: () => _goToEditAnt(context, ant.id),
+                  createTierTag: () => _goToAddTierTag(context, ant.id),
                 ),
               ),
             );

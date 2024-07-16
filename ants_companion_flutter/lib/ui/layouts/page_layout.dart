@@ -11,6 +11,7 @@ class PageLayout extends StatelessWidget {
     required this.slivers,
     this.controller,
     this.onRefresh,
+    this.floatingActionButton,
   });
 
   final String title;
@@ -19,6 +20,8 @@ class PageLayout extends StatelessWidget {
   final ScrollController? controller;
 
   final Future<void> Function()? onRefresh;
+
+  final Widget? floatingActionButton;
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +45,7 @@ class PageLayout extends StatelessWidget {
     return Scaffold(
       drawer: const AppDrawer(),
       body: content,
+      floatingActionButton: floatingActionButton,
     );
   }
 }

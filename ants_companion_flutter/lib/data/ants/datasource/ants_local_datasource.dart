@@ -28,7 +28,6 @@ class AntsLocalDatasource {
       }
       return ants;
     } catch (e, s) {
-      // logger.e('Failed to get ants from cache.');
       logger.e('Failed to get ants from cache: $e', error: e, stackTrace: s);
       throw LocalDatabaseException('Failed to get ants: $e');
     }
@@ -45,7 +44,6 @@ class AntsLocalDatasource {
 
   Future<Ant> create(final Ant ant) async {
     logger.d('Adding ${ant.name} to cache.');
-    // await _box.add(ant);
     await _box.put(ant.id, ant);
     logger.i('Cached ${ant.name}.');
     return ant;
@@ -53,7 +51,6 @@ class AntsLocalDatasource {
 
   Future<Ant> update(final Ant ant) async {
     logger.d('Updating ${ant.name} in cache.');
-    // await _box.add(ant);
     await _box.put(ant.id, ant);
     logger.i('Cached ${ant.name}.');
     return ant;
@@ -61,7 +58,6 @@ class AntsLocalDatasource {
 
   Future<void> delete(final String antId) async {
     logger.d('deleting ant with id: $antId in cache.');
-    // await _box.add(ant);
     await _box.delete(antId);
     logger.i('deleted ant $antId from cache.');
   }
@@ -69,11 +65,7 @@ class AntsLocalDatasource {
   Future<void> clearAllAnts() async {
     logger.d('Clearing ants cache.');
 
-    // throw HiveError('LOLOLOL');
-
     try {
-      // throw HiveError('LOLOLOL');
-      // throw LocalDatabaseException('Failed to clear ants cache:');
       await _box.clear();
 
       logger.i('Successfully cleared ants cache.');

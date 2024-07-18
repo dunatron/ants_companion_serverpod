@@ -11,6 +11,7 @@ import 'package:ants_companion_flutter/ui/inputs/multi_select/multi_select_contr
 import 'package:ants_companion_flutter/ui/inputs/select_one_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:go_router/go_router.dart';
 
 class CreateAntForm extends StatefulWidget {
   const CreateAntForm({super.key});
@@ -49,13 +50,13 @@ class _CreateAntFormState extends State<CreateAntForm> {
           role: AntRole.melee,
         ),
       );
-      // ScaffoldMessenger.of(context).showSnackBar(
-      //   SnackBar(content: Text('Created ant ${createdAnt.toString()}')),
-      // );
+
       SnackbarService().showSnackbar(
         'Created ant ${createdAnt.toString()}',
         type: SnackbarType.info,
       );
+
+      if (mounted) context.pop();
     } on AppException catch (e, s) {
       logger.e(e.message, stackTrace: s);
       SnackbarService().showSnackbar(e.toString());

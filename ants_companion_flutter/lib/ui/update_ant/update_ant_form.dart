@@ -6,6 +6,7 @@ import 'package:ants_companion_flutter/domain/ants/ants.dart';
 import 'package:ants_companion_flutter/domain/ants/models/ant.dart';
 import 'package:ants_companion_flutter/domain/ants/models/ant_type.dart';
 import 'package:ants_companion_flutter/domain/exceptions/exceptions.dart';
+import 'package:ants_companion_flutter/ui/widgets/ant_profile_image.dart';
 import 'package:ants_companion_flutter/ui/widgets/custom_file_picker.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -62,8 +63,8 @@ class _UpdateAntFormState extends State<UpdateAntForm> {
         'Updated ant ${updatedAnt.toString()}',
         type: SnackbarType.info,
       );
-      if (!context.mounted) return;
-      Navigator.of(context).pop();
+
+      if (mounted) Navigator.of(context).pop();
     } on AppException catch (e, s) {
       logger.e(e.message, stackTrace: s);
       SnackbarService().showSnackbar(e.toString());
@@ -98,13 +99,20 @@ class _UpdateAntFormState extends State<UpdateAntForm> {
     final form = Form(
       key: _formKey,
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          const Text('Profile Image'),
-          if (_publicUrl != null) Image.network(_publicUrl!),
-          Align(
-            alignment: Alignment.bottomLeft,
-            child: CustomFilePicker(onPicked: onFilePicked),
+          // if (_publicUrl != null) Image.network(_publicUrl!),
+          if (_publicUrl != null)
+            AntProfileImage(
+              src: _publicUrl!,
+              radius: 120,
+            ),
+          SizedBox(
+            height: 24,
+          ),
+          CustomFilePicker(onPicked: onFilePicked),
+          SizedBox(
+            height: 24,
           ),
           TextFormField(
             autovalidateMode: AutovalidateMode.onUserInteraction,

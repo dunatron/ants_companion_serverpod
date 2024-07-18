@@ -29,13 +29,18 @@
 //   }
 // }
 
+import 'package:ants_companion_flutter/domain/ants/models/ant.dart';
+import 'package:ants_companion_flutter/ui/widgets/ant_details.dart';
 import 'package:flutter/material.dart';
 
 class AntDetailsScreen extends StatelessWidget {
   const AntDetailsScreen({
     super.key,
     required this.scrollController,
+    required this.ant,
   });
+
+  final Ant ant;
 
   final ScrollController scrollController;
 
@@ -44,14 +49,17 @@ class AntDetailsScreen extends StatelessWidget {
     return CustomScrollView(
       controller: scrollController,
       slivers: [
-        SliverList.builder(
-          itemCount: 100,
-          itemBuilder: (context, index) {
-            return ListTile(
-              title: Text('Index: $index'),
-            );
-          },
-        )
+        SliverToBoxAdapter(
+          child: AntDetails(ant: ant),
+        ),
+        // SliverList.builder(
+        //   itemCount: 100,
+        //   itemBuilder: (context, index) {
+        //     return ListTile(
+        //       title: Text('Index: $index'),
+        //     );
+        //   },
+        // )
       ],
     );
   }

@@ -12,7 +12,9 @@ import 'package:file_picker/file_picker.dart';
 import 'package:rxdart/subjects.dart';
 
 class AntsRepository implements AntsProvider {
-  AntsRepository(this._datasource);
+  AntsRepository(this._datasource) {
+    _loadAnts();
+  }
 
   final AntsDatasource _datasource;
 
@@ -42,9 +44,10 @@ class AntsRepository implements AntsProvider {
 
   @override
   Future<Ant?> antById(String id) async {
-    final ant = _antsSubject.value.firstWhere((it) => it.id == id);
-
-    print('FOUND ANT BY ID: $ant');
+    await Future.delayed(const Duration(seconds: 2));
+    final ant = _antsSubject.stream.first
+        .then((it) => it.firstWhere((element) => element.id == id));
+    logger.d('Ant found by id: $ant');
     return ant;
   }
 

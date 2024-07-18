@@ -36,7 +36,10 @@ class HomeScreen extends StatelessWidget {
               BuildContext context,
               ScrollController scrollController,
             ) =>
-                AntDetailsScreen(scrollController: scrollController),
+                AntDetailsScreen(
+              scrollController: scrollController,
+              ant: ant,
+            ),
           );
         },
       );

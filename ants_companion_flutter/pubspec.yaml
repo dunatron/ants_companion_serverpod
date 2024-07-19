@@ -43,6 +43,7 @@ dependencies:
   liquid_swipe: ^3.1.0
   file_picker: ^8.0.5
   flutter_image: ^4.1.11
+  flutter_local_notifications: ^17.2.1+2
 
 dev_dependencies:
   build_runner: ^2.4.9

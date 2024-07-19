@@ -32,6 +32,8 @@ Future<void> setupDI() async {
   );
 
   GetIt.I.registerLazySingleton(
-    () => TierTags(TierTagsRepository(client)),
+    () => TierTags(
+      TierTagsRepository(GetIt.I()),
+    ),
   );
 }

@@ -79,6 +79,14 @@ class AppDrawer extends StatelessWidget {
               Navigator.pop(context);
             },
           ),
+          ListTile(
+            leading: const Icon(Icons.message),
+            title: const Text('CA Reminders'),
+            onTap: () {
+              context.go('/csv-manager');
+              Navigator.pop(context);
+            },
+          ),
         ],
       ),
     );

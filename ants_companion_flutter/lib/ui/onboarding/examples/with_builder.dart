@@ -35,8 +35,8 @@ class _WithBuilder extends State<WithBuilder> {
         "View strongest ants!"),
     ItemData(Colors.yellow, "assets/1.png", "Top Ants", "Used for",
         "Building your team"),
-    ItemData(
-        Colors.pink, "assets/1.png", "Example", "of a page", "with Gesture"),
+    ItemData(Colors.pink, "assets/1.png", "CA", "Reminders",
+        "Never miss your favourite CA"),
     ItemData(
         Colors.red, "assets/1.png", "Hatch Recorder", "try it", "get insights"),
   ];

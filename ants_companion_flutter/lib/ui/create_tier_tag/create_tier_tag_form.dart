@@ -1,7 +1,8 @@
 import 'package:ants_companion_flutter/common/sanitize_string.dart';
 import 'package:ants_companion_flutter/domain/ants/ants.dart';
 import 'package:ants_companion_flutter/domain/ants/models/ant.dart';
-import 'package:ants_companion_flutter/domain/tier_tags/models/tier_tag.dart';
+import 'package:ants_companion_flutter/domain/models/game_mode.dart';
+import 'package:ants_companion_flutter/domain/tier_tags/models/ant_tier_tag.dart';
 import 'package:ants_companion_flutter/domain/tier_tags/models/lineup_position.dart';
 import 'package:ants_companion_flutter/domain/tier_tags/models/tier_rating.dart';
 import 'package:ants_companion_flutter/domain/tier_tags/tier_tags.dart';
@@ -18,8 +19,6 @@ class CreateTierTagForm extends StatefulWidget {
 }
 
 class _CreateTierTagFormState extends State<CreateTierTagForm> {
-  final Ants _ants = GetIt.I<Ants>();
-
   final TierTags _tierTags = GetIt.I<TierTags>();
 
   final _formKey = GlobalKey<FormState>();
@@ -39,14 +38,18 @@ class _CreateTierTagFormState extends State<CreateTierTagForm> {
 
   Future<void> _createTierTag() async {
     final tierTag = switch (_selectedTagType) {
-      'PVE' => AntPveTierTag(
+      'PVE' => AntTierTag(
+          id: '',
           antId: _selectedAnt!.id,
+          gameMode: GameMode.pve,
           rating: _selectedTierRating!,
           reason: _reasonController.text,
           lineupPosition: _selectedLineupPosition!,
         ),
-      'PVP' => AntPvpTierTag(
+      'PVP' => AntTierTag(
+          id: '',
           antId: _selectedAnt!.id,
+          gameMode: GameMode.pvp,
           rating: _selectedTierRating!,
           reason: _reasonController.text,
           lineupPosition: _selectedLineupPosition!,

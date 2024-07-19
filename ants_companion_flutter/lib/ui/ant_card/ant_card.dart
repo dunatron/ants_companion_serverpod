@@ -162,6 +162,10 @@ class AntTierTags extends StatelessWidget {
       builder: (context, snapshot) {
         final data = snapshot.data;
 
+        if (snapshot.error != null) {
+          return const SizedBox();
+        }
+
         if (data == null) {
           return const CircularProgressIndicator();
         }

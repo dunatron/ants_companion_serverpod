@@ -3,6 +3,8 @@ import 'package:ants_companion_flutter/domain/ants/models/ant.dart';
 import 'package:ants_companion_flutter/ui/ant_details/ant_details_screen.dart';
 import 'package:ants_companion_flutter/ui/ants_carousel/all_ants_carousel.dart';
 import 'package:ants_companion_flutter/ui/layouts/page_layout.dart';
+import 'package:ants_companion_flutter/ui/widgets/add_card.dart';
+import 'package:ants_companion_flutter/ui/widgets/tier_display/tier_display.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
@@ -70,30 +72,13 @@ class HomeScreen extends StatelessWidget {
             ],
           ),
         ),
-        // SliverToBoxAdapter(
-        //   child: AllAntsCarousel(
-        //     onItemImageTap: (final ant) => _launchAntDetails(ant, context),
-        //   ),
-        // ),
-        StreamBuilder(
-          stream: _ants.antsList(),
-          builder: (context, snapshot) {
-            final data = snapshot.data;
-
-            if (data == null) {
-              return SliverToBoxAdapter(child: Container());
-            }
-            return SliverList.builder(
-              itemCount: data.length,
-              itemBuilder: (context, index) {
-                final ant = data[index];
-                return ListTile(
-                  title: Text('${ant.name}'),
-                );
-              },
-            );
-          },
-        )
+        SliverToBoxAdapter(
+          child: AllAntsCarousel(
+            onItemImageTap: (final ant) => _launchAntDetails(ant, context),
+          ),
+        ),
+        const SliverToBoxAdapter(child: AdCard()),
+        SliverToBoxAdapter(child: TierDisplayWithData(ants: _ants)),
       ],
     );
   }

@@ -14,7 +14,7 @@ extension TierTagApiModelToDomainExtension on api.TierTag {
         id: id.toString(),
         antId: antId.toString(),
         gameMode: type == api.TierTagType.pve ? GameMode.pve : GameMode.pvp,
-        rating: TierRating.meta,
+        rating: rating.toDomain(),
         reason: reason,
         lineupPosition: position.toDomain(),
       );

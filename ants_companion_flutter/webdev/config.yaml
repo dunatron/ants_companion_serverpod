@@ -1,0 +1,7 @@
+serve:
+  web:
+    enable-middleware: true
+    port: 61381
+    tls:
+      certificate: ~/certs/cert.pem
+      key: ~/certs/key.pem

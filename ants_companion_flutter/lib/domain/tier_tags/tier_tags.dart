@@ -11,6 +11,8 @@ class TierTags {
       _provider.tierTagsForAnt(antId);
 
   Future<AntTierTag> create(AntTierTag tierTag) => _provider.create(tierTag);
+
+  Future<void> refresh() => _provider.refresh();
 }
 
 abstract class TierTagsProvider {
@@ -19,4 +21,6 @@ abstract class TierTagsProvider {
   Stream<List<AntTierTag>> tierTagsForAnt(final String antId);
 
   Future<AntTierTag> create(AntTierTag tierTag);
+
+  Future<void> refresh();
 }

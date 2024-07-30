@@ -6,7 +6,7 @@ import 'package:ants_companion_flutter/core/log/loggers.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-Future<void> bootstrap(Widget child) async {
+Future<void> bootstrap() async {
   final logger = appLogger(App);
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -24,6 +24,4 @@ Future<void> bootstrap(Widget child) async {
   };
 
   await setupDI();
-
-  runApp(child);
 }

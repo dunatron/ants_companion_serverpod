@@ -1,9 +1,10 @@
 import 'package:ants_companion_flutter/domain/ants/models/ant.dart';
 import 'package:ants_companion_flutter/domain/ants/models/ant_type.dart';
+import 'package:ants_companion_flutter/domain/models/game_mode.dart';
 import 'package:ants_companion_flutter/domain/tier_tags/models/ant_tier_tag.dart';
 import 'package:ants_companion_flutter/domain/tier_tags/models/lineup_position.dart';
 import 'package:ants_companion_flutter/domain/tier_tags/models/tier_rating.dart';
-import 'package:ants_companion_flutter/ui/widgets/tier_display/ant_tier_indicator.dart';
+import 'package:ants_companion_flutter/ui/tier_display/ant_tier_indicator.dart';
 import 'package:flutter/material.dart';
 
 class TierSection extends StatelessWidget {
@@ -12,6 +13,7 @@ class TierSection extends StatelessWidget {
     required this.ants,
     required this.antType,
     required this.tierRating,
+    required this.gameMode,
     required this.isPvp,
     required this.tierTags,
   });
@@ -24,6 +26,8 @@ class TierSection extends StatelessWidget {
   final List<AntTierTag> tierTags;
 
   final bool isPvp;
+
+  final GameMode gameMode;
 
   // void _onIndicatorTap(final Ant ant) => AlertDialog(
   //       content: Card(
@@ -66,70 +70,27 @@ class TierSection extends StatelessWidget {
     List<Ant> backRow = [];
 
     for (var tag in tierTags) {
-      if (tag.rating == tierRating) {
+      if (tag.rating == tierRating && tag.gameMode == gameMode) {
         if (tag.lineupPosition == LineupPosition.front) {
           final ant = ants.firstWhere((it) => it.id == tag.antId);
           frontRow.add(ant);
         } else if (tag.lineupPosition == LineupPosition.middle) {
           final ant = ants.firstWhere((it) => it.id == tag.antId);
-          frontRow.add(ant);
+          middleRow.add(ant);
         } else if (tag.lineupPosition == LineupPosition.back) {
           final ant = ants.firstWhere((it) => it.id == tag.antId);
-          frontRow.add(ant);
+          backRow.add(ant);
         }
       }
-      // for (var tag in ant.tierTags) {
-      //   final isPvpTag = tag is AntPvpTierTag;
-
-      //   final isCorrectTagType = isPvpTag == isPvp;
-
-      //   final valid = tag.rating == tierRating &&
-      //       tag.antType == antType &&
-      //       isCorrectTagType;
-      //   // final valid = tag.rating == tierRating &&
-      //   //     (tag.antType == antType || tag.antType == AntType.universal) &&
-      //   //     isCorrectTagType;
-      //   if (tag.rowPosition == RowPosition.front && valid) {
-      //     frontRow.add(ant);
-      //   } else if (tag.rowPosition == RowPosition.middle && valid) {
-      //     middleRow.add(ant);
-      //   } else if (tag.rowPosition == RowPosition.back && valid) {
-      //     backRow.add(ant);
-      //   }
-      // }
     }
-
-    // for (var ant in ants) {
-    //   // for (var tag in ant.tierTags) {
-    //   //   final isPvpTag = tag is AntPvpTierTag;
-
-    //   //   final isCorrectTagType = isPvpTag == isPvp;
-
-    //   //   final valid = tag.rating == tierRating &&
-    //   //       tag.antType == antType &&
-    //   //       isCorrectTagType;
-    //   //   // final valid = tag.rating == tierRating &&
-    //   //   //     (tag.antType == antType || tag.antType == AntType.universal) &&
-    //   //   //     isCorrectTagType;
-    //   //   if (tag.rowPosition == RowPosition.front && valid) {
-    //   //     frontRow.add(ant);
-    //   //   } else if (tag.rowPosition == RowPosition.middle && valid) {
-    //   //     middleRow.add(ant);
-    //   //   } else if (tag.rowPosition == RowPosition.back && valid) {
-    //   //     backRow.add(ant);
-    //   //   }
-    //   // }
-    // }
 
     if (frontRow.isEmpty && middleRow.isEmpty && backRow.isEmpty) {
       return const SizedBox();
     }
 
     return Container(
-      // color: tierRating.color,
       margin: const EdgeInsets.only(bottom: 64),
       child: Column(
-        // crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Text(
@@ -149,7 +110,6 @@ class TierSection extends StatelessWidget {
                   children: [
                     const Text('Front'),
                     const SizedBox(height: 16),
-                    // ...frontRow.map((ant) => Chip(label: Text(ant.name)))
                     ...frontRow.map((ant) => AntTierIndicator(
                           ant: ant,
                           onTap: () => showModalBottomSheet(
@@ -162,20 +122,11 @@ class TierSection extends StatelessWidget {
                                 maxChildSize: 0.9,
                                 minChildSize: 0.8,
                                 builder: (context, scrollController) {
-                                  // return SingleChildScrollView(
-                                  //   controller: scrollController,
-                                  //   child: AntDetailsPage(ant: ant),
-                                  // );
-
                                   return Placeholder();
                                 },
                               );
                             },
                           ),
-                          // onTap: () => _showAntModal(
-                          //   context,
-                          //   ant,
-                          // ),
                           tierRating: tierRating,
                         ))
                   ],
@@ -189,10 +140,6 @@ class TierSection extends StatelessWidget {
                     const SizedBox(height: 16),
                     ...middleRow.map((ant) => AntTierIndicator(
                           ant: ant,
-                          // onTap: () => _showAntModal(
-                          //   context,
-                          //   ant,
-                          // ),
                           onTap: () => showModalBottomSheet(
                             isScrollControlled: true,
                             context: context,
@@ -233,14 +180,16 @@ class TierSection extends StatelessWidget {
                   children: [
                     const Text('Back'),
                     const SizedBox(height: 16),
-                    ...backRow.map((ant) => AntTierIndicator(
-                          ant: ant,
-                          onTap: () => _showAntModal(
-                            context,
-                            ant,
-                          ),
-                          tierRating: tierRating,
-                        ))
+                    ...backRow.map(
+                      (ant) => AntTierIndicator(
+                        ant: ant,
+                        onTap: () => _showAntModal(
+                          context,
+                          ant,
+                        ),
+                        tierRating: tierRating,
+                      ),
+                    )
                   ],
                 ),
               ),

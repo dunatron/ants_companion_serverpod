@@ -1,13 +1,17 @@
 import 'package:ants_companion_flutter/ui/admin/admin_screen.dart';
+import 'package:ants_companion_flutter/ui/ads_test_screen.dart';
+import 'package:ants_companion_flutter/ui/ca_details/ca_details_screen.dart';
+import 'package:ants_companion_flutter/ui/ca_scheduler/ca_scheduler_screen.dart';
 import 'package:ants_companion_flutter/ui/create_ant/create_ant_screen.dart';
 import 'package:ants_companion_flutter/ui/create_tier_tag/create_tier_tag_screen.dart';
 import 'package:ants_companion_flutter/ui/home/home_screen.dart';
 import 'package:ants_companion_flutter/ui/onboarding/onboarding_screen.dart';
+import 'package:ants_companion_flutter/ui/pending_notifications/pending_notifications_screen.dart';
 import 'package:ants_companion_flutter/ui/route_not_found/route_not_found_screen.dart';
+import 'package:ants_companion_flutter/ui/soldier_details/soldier_details_comparison_screen.dart';
 import 'package:ants_companion_flutter/ui/tier_ratings/tier_ratings_screen.dart';
 import 'package:ants_companion_flutter/ui/update_ant/update_ant_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey =
@@ -27,9 +31,9 @@ GoRouter routerConfig() => GoRouter(
 final routes = <RouteBase>[
   GoRoute(
     path: '/',
-    builder: (BuildContext context, GoRouterState state) => HomeScreen(),
-    // builder: (BuildContext context, GoRouterState state) =>
-    //     const PveTierPage(),
+    // builder: (BuildContext context, GoRouterState state) => HomeScreen(),
+    builder: (BuildContext context, GoRouterState state) =>
+        SoldierDetailsComparisonScreen(),
     routes: [
       GoRoute(
         path: 'admin',
@@ -44,7 +48,6 @@ final routes = <RouteBase>[
           GoRoute(
             path: 'update-ant/:antId',
             builder: (BuildContext context, GoRouterState state) {
-              print('INTERESTING');
               final antId = state.pathParameters['antId'];
               return UpdateAntScreen(antId: antId!);
             },
@@ -61,7 +64,34 @@ final routes = <RouteBase>[
         builder: (BuildContext context, GoRouterState state) =>
             const OnBoardingScreen(),
       ),
-
+      GoRoute(
+        path: 'ca-scheduler',
+        builder: (BuildContext context, GoRouterState state) =>
+            const CASchedulerScreen(),
+        routes: [
+          GoRoute(
+            path: ':caKey',
+            builder: (BuildContext context, GoRouterState state) =>
+                ColonyActionDetailsScreen(
+              caKey: state.pathParameters['caKey']!,
+            ),
+          ),
+        ],
+      ),
+      GoRoute(
+        path: 'ads-test',
+        builder: (BuildContext context, GoRouterState state) => AdsTestScreen(),
+      ),
+      GoRoute(
+        path: 'pending-notifications',
+        builder: (BuildContext context, GoRouterState state) =>
+            const PendingNotificationsScreen(),
+      ),
+      GoRoute(
+        path: 'soldier-details-comparison',
+        builder: (BuildContext context, GoRouterState state) =>
+            const SoldierDetailsComparisonScreen(),
+      ),
       GoRoute(
         path: 'tier-ratings',
         builder: (BuildContext context, GoRouterState state) =>
@@ -70,35 +100,6 @@ final routes = <RouteBase>[
           // antDetailsRoute(),
         ],
       ),
-      // antDetailsRoute(),
-      // GoRoute(
-      //   path: 'ants-list',
-      //   builder: (BuildContext context, GoRouterState state) =>
-      //       const AntsListPage(),
-      //   routes: [
-      //     antDetailsRoute(),
-      //   ],
-      // ),
-      // GoRoute(
-      //   path: 'pve-tier-list',
-      //   builder: (BuildContext context, GoRouterState state) =>
-      //       const PveTierPage(),
-      // ),
-      // GoRoute(
-      //   path: 'battle-simulator',
-      //   builder: (BuildContext context, GoRouterState state) =>
-      //       const BattleSimulatorPage(),
-      // ),
-      // GoRoute(
-      //   path: 'hatch-recorder',
-      //   builder: (BuildContext context, GoRouterState state) =>
-      //       const HatchRecorderPage(),
-      // ),
-      // GoRoute(
-      //   path: 'csv-manager',
-      //   builder: (BuildContext context, GoRouterState state) =>
-      //       const CsvManagerScreen(),
-      // ),
     ],
   ),
 ];

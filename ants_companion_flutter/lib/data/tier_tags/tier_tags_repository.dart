@@ -56,4 +56,10 @@ class TierTagsRepository implements TierTagsProvider {
         (tierTagsList) =>
             tierTagsList.where((tag) => tag.antId == antId).toList(),
       );
+
+  @override
+  Future<void> refresh() async {
+    _datasource.resetCache();
+    _loadTags();
+  }
 }

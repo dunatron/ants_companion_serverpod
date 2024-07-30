@@ -2,8 +2,10 @@ import 'package:ants_companion_client/ants_companion_client.dart';
 import 'package:ants_companion_flutter/bootstrap/di/register_client.dart';
 import 'package:ants_companion_flutter/bootstrap/di/register_datasources.dart';
 import 'package:ants_companion_flutter/data/ants/ants_repository.dart';
+import 'package:ants_companion_flutter/data/colony_actions/colony_actions_repository.dart';
 import 'package:ants_companion_flutter/data/tier_tags/tier_tags_repository.dart';
 import 'package:ants_companion_flutter/domain/ants/ants.dart';
+import 'package:ants_companion_flutter/domain/colony_actions.dart/colony_actions.dart';
 import 'package:ants_companion_flutter/domain/tier_tags/tier_tags.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:get_it/get_it.dart';
@@ -35,5 +37,9 @@ Future<void> setupDI() async {
     () => TierTags(
       TierTagsRepository(GetIt.I()),
     ),
+  );
+
+  GetIt.I.registerLazySingleton(
+    () => ColonyActions(ColonyActionsRepository(GetIt.I())),
   );
 }

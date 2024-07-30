@@ -83,7 +83,31 @@ class AppDrawer extends StatelessWidget {
             leading: const Icon(Icons.message),
             title: const Text('CA Reminders'),
             onTap: () {
-              context.go('/csv-manager');
+              context.go('/ca-scheduler');
+              Navigator.pop(context);
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.message),
+            title: const Text('Pending Notifications'),
+            onTap: () {
+              context.go('/pending-notifications');
+              Navigator.pop(context);
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.message),
+            title: const Text('Soldier Comparison'),
+            onTap: () {
+              context.go('/soldier-details-comparison');
+              Navigator.pop(context);
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.message),
+            title: const Text('Ads Test'),
+            onTap: () {
+              context.go('/ads-test');
               Navigator.pop(context);
             },
           ),

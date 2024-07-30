@@ -12,3 +12,15 @@ extension TierRatingFromDomainExtension on TierRating {
         TierRating.f => api.TierRating.f,
       };
 }
+
+extension TierRatingToDomainExtension on api.TierRating {
+  TierRating toDomain() => switch (this) {
+        api.TierRating.meta => TierRating.meta,
+        api.TierRating.f2pMeta => TierRating.f2pMeta,
+        api.TierRating.s => TierRating.s,
+        api.TierRating.a => TierRating.a,
+        api.TierRating.b => TierRating.b,
+        api.TierRating.c => TierRating.c,
+        api.TierRating.f => TierRating.f,
+      };
+}

@@ -77,3 +77,11 @@ class Ant extends Equatable {
   @override
   List<Object?> get props => [id, name, type, role, description];
 }
+
+
+
+/// ToDO think about this.
+/// maybe a skill just has an array of effects then we can have different effects..
+/// yet another object to store though
+/// but effects could be broken down simply and an ants abilities can be easily composed of these
+

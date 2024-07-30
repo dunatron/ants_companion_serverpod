@@ -11,4 +11,7 @@ class StoreModelTypeIds {
   static const int gameMode = 4;
   static const int lineupPosition = 5;
   static const int tierRating = 6;
+
+  /// Colony Action
+  static const int colonyAction = 7;
 }

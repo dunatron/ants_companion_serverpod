@@ -53,6 +53,8 @@ android {
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+        // Notifications: ToDo not sure if needed...
+        multiDexEnabled true
     }
 
     buildTypes {
@@ -71,4 +73,8 @@ flutter {
 dependencies {
     // Notifications
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.2.2'
+    implementation 'androidx.core:core-ktx:1.10.1'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.9.0'
+    implementation 'androidx.window:window:1.2.0'
 }

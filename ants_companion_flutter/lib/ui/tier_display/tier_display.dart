@@ -1,11 +1,12 @@
 import 'package:ants_companion_flutter/domain/ants/ants.dart';
 import 'package:ants_companion_flutter/domain/ants/models/ant.dart';
 import 'package:ants_companion_flutter/domain/ants/models/ant_type.dart';
+import 'package:ants_companion_flutter/domain/models/game_mode.dart';
 import 'package:ants_companion_flutter/domain/tier_tags/models/tier_rating.dart';
 import 'package:ants_companion_flutter/domain/tier_tags/tier_tags.dart';
 import 'package:ants_companion_flutter/ui/draggable_scroll_configuration.dart';
 import 'package:ants_companion_flutter/ui/widgets/section.dart';
-import 'package:ants_companion_flutter/ui/widgets/tier_display/tier_section.dart';
+import 'package:ants_companion_flutter/ui/tier_display/tier_section.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
@@ -166,6 +167,7 @@ class _TierDisplayState extends State<TierDisplay> {
                     antType: _antType,
                     tierRating: tierRating,
                     ants: widget.ants,
+                    gameMode: _isPvp ? GameMode.pvp : GameMode.pve,
                     isPvp: _isPvp,
                     tierTags: data ?? [],
                   ),

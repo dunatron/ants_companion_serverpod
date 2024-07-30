@@ -1,10 +1,12 @@
 import 'package:ants_companion_flutter/domain/ants/ants.dart';
 import 'package:ants_companion_flutter/domain/ants/models/ant.dart';
+import 'package:ants_companion_flutter/domain/tier_tags/tier_tags.dart';
 import 'package:ants_companion_flutter/ui/ant_details/ant_details_screen.dart';
 import 'package:ants_companion_flutter/ui/ants_carousel/all_ants_carousel.dart';
 import 'package:ants_companion_flutter/ui/layouts/page_layout.dart';
+import 'package:ants_companion_flutter/ui/widgets/notification_tests.dart';
 import 'package:ants_companion_flutter/ui/widgets/add_card.dart';
-import 'package:ants_companion_flutter/ui/widgets/tier_display/tier_display.dart';
+import 'package:ants_companion_flutter/ui/tier_display/tier_display.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
@@ -14,6 +16,7 @@ class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
 
   final Ants _ants = GetIt.I<Ants>();
+  final TierTags _tierTags = GetIt.I<TierTags>();
 
   _continueToTierRatingsScreen(BuildContext context) {
     context.go('/tier-ratings');
@@ -52,6 +55,7 @@ class HomeScreen extends StatelessWidget {
       title: 'Home',
       onRefresh: () async {
         await _ants.refresh();
+        await _tierTags.refresh();
       },
       slivers: [
         const SliverToBoxAdapter(
@@ -72,13 +76,14 @@ class HomeScreen extends StatelessWidget {
             ],
           ),
         ),
-        SliverToBoxAdapter(
-          child: AllAntsCarousel(
-            onItemImageTap: (final ant) => _launchAntDetails(ant, context),
-          ),
-        ),
-        const SliverToBoxAdapter(child: AdCard()),
+        // SliverToBoxAdapter(
+        //   child: AllAntsCarousel(
+        //     onItemImageTap: (final ant) => _launchAntDetails(ant, context),
+        //   ),
+        // ),
+        // const SliverToBoxAdapter(child: AdCard()),
         SliverToBoxAdapter(child: TierDisplayWithData(ants: _ants)),
+        const SliverToBoxAdapter(child: NotificationTests()),
       ],
     );
   }

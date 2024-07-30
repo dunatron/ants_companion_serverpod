@@ -21,7 +21,7 @@ class App extends StatelessWidget {
         useMaterial3: true,
         colorScheme: darkColorScheme,
       ),
-      themeMode: ThemeMode.dark,
+      // themeMode: ThemeMode.dark,
       routerConfig: routerConfig(),
     );
   }
